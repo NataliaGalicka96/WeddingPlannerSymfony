@@ -6,9 +6,6 @@
    <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}">
 {% endblock %}
 
-{% block javascripts %}
-    <script src="https://kit.fontawesome.com/0493276a63.js" crossorigin="anonymous"></script>
-{% endblock %}
 
 {% block body %}
 
@@ -59,13 +56,13 @@
                     </a>
                 </div>
                 <div class="col-8 col-md-3 mb-5">
-                    <a class="btn" href="Budget.html" role="button">
+                    <a class="btn" href="{{ path('app_budget')}}" role="button">
                         <p>Zaplanuj swoje wydatki - śledź całkowity budżet, ceny i wszelkie zaległe opłaty.</p>Budżet<i
                             class="fa-solid fa-coins"></i>
                     </a>
                 </div>
                 <div class="col-8 col-md-3 mb-5">
-                    <a class="btn" href="Guests.html" role="button">
+                    <a class="btn" href="{{ path('app_guest')}}" role="button">
                         <p>Stwórz listę gości, zmień status gości, dodaj indywidualne notatki, ograniczenia żywieniowe.
                         </p>
                         Lista gości<i class="fa-solid fa-people-group"></i>
