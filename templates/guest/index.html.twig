@@ -1,0 +1,211 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WeddingPlanner{% endblock %}
+
+{% block stylesheets %}
+   <link rel="stylesheet" href="{{ asset('assets/css/guests.css') }}">
+{% endblock %}
+{% block body %}
+<nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="checkList.html">Zadania</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Budget.html">Budżet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Guests.html">Goście</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Notes.html">Notatki</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Contact.html">Kontakty</a>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Calendar.html">Kalendarz</a>
+                    </li>
+                    -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Ustawienia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Wyloguj</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <h1>Lista gości</h1>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-8 col-md-3 mb-5">
+                <a class="btn" id="addPerson" href="#" role="button" data-bs-toggle="modal"
+                    data-bs-target="#addNewGuest">
+                    Dodaj gościa
+                </a>
+            </div>
+        </div>
+        <form action="#" method="POST">
+            <table id="guests">
+                <thead>
+                    <tr>
+                        <th scope="col">Imię i nazwisko</th>
+                        <th scope="col">Potwierdzone</th>
+                        <th scope="col">Nocleg</th>
+                        <th scope="col">Transport</th>
+                        <th scope="col">Osoba dorosła</th>
+                        <th scope="col">Dziecko &lt; 3 lata</th>
+                        <th scope="col">Dziecko 3-12 lat</th>
+                        <th scope="col">Specjalna dieta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Imię i nazwisko">Mariusz Galicki</td>
+                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value=""></td>
+                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value=""></td>
+                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+                        <td data-label="Dziecko &lt; 3 lata"><input class="form-check-input mt-1" type="checkbox"
+                                value=""></td>
+                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="Imię i nazwisko">Mikołaj Galicki</td>
+                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value=""></td>
+                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value=""></td>
+                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+                        <td data-label="Dziecko &lt; 3 lata"><input class="form-check-input mt-1" type="checkbox"
+                                value=""></td>
+                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td data-label="Imię i nazwisko">Aleksander Galicki</td>
+                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value=""></td>
+                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value=""></td>
+                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+                        <td data-label="Dziecko &lt; 3 lata"><input class="form-check-input mt-1" type="checkbox"
+                                value=""></td>
+                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="">
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+
+        <h1>Podsumowanie</h1>
+
+        <table class="mt-5" id="summary">
+            <thead>
+                <tr>
+                    <th scope="col">Łączna liczba gości</th>
+                    <th scope="col">Liczba dorosłych</th>
+                    <th scope="col">Liczba dzieci 3-12 lat</th>
+                    <th scope="col">Liczba dzieci &lt; 3 lata</th>
+                    <th scope="col">Liczba potrzebnych noclegów</th>
+                    <th scope="col">Liczba osób potrzebujących transport</th>
+                    <th scopse="col">Specjalna dieta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Łączna liczba gości">125</td>
+                    <td data-label="Liczba dorosłych">100
+                    </td>
+                    <td data-label="Liczba dzieci 3-12 lat">10</td>
+                    <td data-label="Liczba dzieci &lt; 3 lata">15</td>
+                    <td data-label="Liczba potrzebnych noclegów">17 </td>
+                    <td data-label="Liczba osób potrzebujących transport">5</td>
+                    <td data-label="Specjalna dieta">3</td>
+
+                </tr>
+        </table>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="addNewGuest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dodaj nowego gościa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
+                            <label for="floatingInput">Imię i nazwisko</label>
+                        </div>
+                        <div>
+                            <label>Potwierdzone</label>
+                            <input class="form-check-input mt-1" type="checkbox" value="">
+                        </div>
+                        <div>
+                            <label>Nocleg</label>
+                            <input class="form-check-input mt-1" type="checkbox" value="">
+                        </div>
+                        <div>
+                            <label>Transport</label>
+                            <input class="form-check-input mt-1" type="checkbox" value="">
+                        </div>
+                        <div>
+                            <label>Osoba dorosła</label>
+                            <input class="form-check-input mt-1" type="checkbox" value="">
+                        </div>
+                        <div>
+                            <label>Dziecko &lt; 3 lata </label>
+                            <input class="form-check-input mt-1" type="checkbox" value="">
+                        </div>
+                        <div>
+                            <label>Dziecko 3-12 lat</label>
+                            <input class="form-check-input mt-1" type="checkbox" value="">
+                        </div>
+                        <div>
+                            <label>Specjalna dieta</label>
+                            <input class="form-check-input mt-1" type="checkbox" value="">
+                        </div>
+
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class=" btn btn-success" id="accept">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
