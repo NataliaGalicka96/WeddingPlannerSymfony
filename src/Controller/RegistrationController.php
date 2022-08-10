@@ -54,6 +54,8 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', "Rejestracja powiodła się!");
+
 
         
             /*
@@ -75,6 +77,8 @@ class RegistrationController extends AbstractController
             );
             */
 
+        }else{
+            $this->addFlash('error', "Nie udało się zarejestrować konta!");
         }
 
         return $this->render('registration/register.html.twig', [
