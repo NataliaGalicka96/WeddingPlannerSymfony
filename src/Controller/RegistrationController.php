@@ -18,6 +18,7 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
+
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
@@ -30,6 +31,12 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
+
+        if($this->getUser()){
+            return $this->redirectToRoute('app_index');
+        }
+
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -61,6 +68,7 @@ class RegistrationController extends AbstractController
                 $authenticator,
                 $request
             );
+
         }
 
         return $this->render('registration/register.html.twig', [
@@ -68,6 +76,7 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    /*
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
@@ -87,4 +96,6 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_register');
     }
+}
+*/
 }

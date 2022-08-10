@@ -11,6 +11,8 @@ class GuestController extends AbstractController
     #[Route('/guest', name: 'app_guest')]
     public function index(): Response
     {
+
+        
         return $this->render('guest/index.html.twig', [
             'controller_name' => 'GuestController',
         ]);

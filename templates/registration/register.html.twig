@@ -2,20 +2,102 @@
 
 {% block title %}Register{% endblock %}
 
+{% block stylesheets %}
+   <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+{% endblock %}
+
+
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+<!--
+    <div class="col-10 col-lg-6">
+        <div class="login">
+            <div class="title">
+                <h2>Rejestracja</h2>
+            </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                <div class="row mb-3">
+                    <div class="input-group">
+                        <i class="fa-solid fa-user"></i>
+                        <input class="form-control" type="text" name="username" placeholder="Imię" autofocus value=""
+                            required>
+                    </div>
+                </div>
+
+                <div class=" row mb-3">
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                            placeholder="Email" required value="">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Hasło"
+                            required>
+                </div>
+
+                    <div id="showPassword">
+                        <input class="form-check-input mx-2" type="checkbox" id="checkbox" name="checkbox"
+                            onclick="showPassword()">
+                        <label for="checkbox">Pokaż hasło</label>
+                    </div>
+
+                </div>
+
+
+                <div class="button mt-2"><button type="submit" class="btn">Zarejestruj się</button></div>
+
+                <div class="signin">Masz już konto? <a href="login.html"> Zaloguj się!</a></div>
+            </form>
+        </div>
+    </div>
+
+-->
+
+    <div class="col-10 col-lg-6">
+        <div class="login">
+            <div class="title">
+                <h2>Rejestracja</h2>
+            </div>
+                    {% form_theme registrationForm with [
+                    'bootstrap_4_layout.html.twig'
+                ] %}
+
+                            
+                {{ form_start(registrationForm) }}
+                <div class="row mb-3">
+                    {{ form_row(registrationForm.username) }}
+                </div>
+                <div class="row mb-3">
+                    {{ form_row(registrationForm.email) }}
+                </div>
+                <div class="row mb-3">
+                 {{ form_row(registrationForm.plainPassword) }}
+                </div>         
+                <div id="showPassword">
+                    <input class="form-check-input mx-2" type="checkbox" id="checkbox" name="checkbox"
+                            onclick="showPassword()">
+                    <label for="checkbox">Pokaż hasło</label>
+                </div>       
+
+                <div class="button mt-2"><button type="submit" class="btn">Zarejestruj się</button></div>
+
+                <div class="signin">Masz już konto? <a href="{{ path('app_login')}}"> Zaloguj się!</a></div>
+                
+                    {{ form_end(registrationForm) }}
+            </div>
+        </div>
+
+
+
+
+        
+
 {% endblock %}

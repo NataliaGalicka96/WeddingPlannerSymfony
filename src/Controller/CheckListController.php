@@ -11,6 +11,7 @@ class CheckListController extends AbstractController
     #[Route('/check/list', name: 'app_check_list')]
     public function index(): Response
     {
+
         return $this->render('check_list/index.html.twig', [
             'controller_name' => 'CheckListController',
         ]);
