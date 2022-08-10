@@ -6,9 +6,6 @@
    <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}">
 {% endblock %}
 
-{% block javascripts %}
-    <script src="https://kit.fontawesome.com/0493276a63.js" crossorigin="anonymous"></script>
-{% endblock %}
 
 {% block body %}
 
@@ -50,7 +47,7 @@
         <div class="container">
             <div class="row justify-content-around ">
                 <div class="col-8 col-md-3 mb-5">
-                    <a class="btn" href="checkList.html" role="button">
+                    <a class="btn" href="{{ path('app_check_list')}}" role="button">
                         <p>Zadbaj o
                             najmniejszy detal na Waszym Ślubie. Zrób listę zadań, która pomoże Wam w organizacji wesela.
                         </p>
@@ -59,13 +56,13 @@
                     </a>
                 </div>
                 <div class="col-8 col-md-3 mb-5">
-                    <a class="btn" href="Budget.html" role="button">
+                    <a class="btn" href="{{ path('app_budget')}}" role="button">
                         <p>Zaplanuj swoje wydatki - śledź całkowity budżet, ceny i wszelkie zaległe opłaty.</p>Budżet<i
                             class="fa-solid fa-coins"></i>
                     </a>
                 </div>
                 <div class="col-8 col-md-3 mb-5">
-                    <a class="btn" href="Guests.html" role="button">
+                    <a class="btn" href="{{ path('app_guest')}}" role="button">
                         <p>Stwórz listę gości, zmień status gości, dodaj indywidualne notatki, ograniczenia żywieniowe.
                         </p>
                         Lista gości<i class="fa-solid fa-people-group"></i>
@@ -74,18 +71,20 @@
             </div>
             <div class="row justify-content-around ">
                 <div class="col-8 col-md-3 mb-5">
-                    <a class="btn" href="Contact.html" role="button">
+                    <a class="btn" href="{{ path('app_contact')}}" role="button">
                         <p>Trzymaj namiary do kosmetyczki, zespołu weselnego czy fotografa w jednym miejscu!</p>
                         Kontakty<i class="fa-solid fa-phone"></i>
                     </a>
                 </div>
+                <!--
                 <div class="col-8 col-md-3 mb-5">
                     <a class="btn" href="Calendar.html" role="button">
                         <p>Dodaj każde ważne wydarzenie do kalendarza. </p>Kalendarz<i class="fa-solid fa-calendar"></i>
                     </a>
                 </div>
+                -->
                 <div class="col-8 col-md-3 mb-5">
-                    <a class="btn" href="Notes.html" role="button">
+                    <a class="btn" href={{ path('app_note')}} role="button">
                         <p>Użyj tego narżędzia aby stworzyć ważne notatki, przemówienia.</p>Notatki<i
                             class="fa-solid fa-note-sticky"></i></i>
                     </a>

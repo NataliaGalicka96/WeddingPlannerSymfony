@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WeddingPlanner{% endblock %}
+
+{% block stylesheets %}
+   <link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}">
+{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('app_check_list')}}">Zadania</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_budget')}}">Budżet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_guest')}}">Goście</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_note')}}">Notatki</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_contact')}}">Kontakty</a>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Calendar.html">Kalendarz</a>
+                    </li>
+                    -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Ustawienia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_index')}}">Wyloguj</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <h1>Kontakty</h1>
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-8 col-sm-5 mb-3">
+                <button class="btn" data-bs-toggle="modal" data-bs-target="#addNewContact"> Dodaj kontakt</button>
+            </div>
+
+            <div class=" col-8 col-sm-5 mb-3">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Wyszukaj..." aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Szukaj</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+
+            <table id="contact">
+                <thead>
+                    <tr>
+                        <th scope="col">Nazwa kontaktu</th>
+                        <th scope="col">Adres</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Telefon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Imię i nazwisko">Mariusz Galicki</td>
+                        <td data-label="Adres">ul. Projektowana 6a, 05-080 Izabelin C
+                        </td>
+                        <td data-label="E-mail">nataliagalicka@gmail.com</td>
+                        <td data-label="Telefon">459 345 230</td>
+
+                    </tr>
+                    <tr>
+                        <td data-label="Imię i nazwisko">Mikołaj Galicki</td>
+                        <td data-label="Adres">ul. Projektowana 6a, 05-080 Izabelin C
+                        </td>
+                        <td data-label="E-mail">nataliagalicka@gmail.com</td>
+                        <td data-label="Telefon">459 345 230</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addNewContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dodaj zadanie do wykonania</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
+                            <label for="floatingInput">Nazwa kontatku</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
+                            <label for="floatingInput">Adres</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
+                            <label for="floatingInput">E-mail</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
+                            <label for="floatingInput">Numer telefonu</label>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class=" btn btn-success" id="accept">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WeddingPlanner{% endblock %}
+
+{% block stylesheets %}
+   <link rel="stylesheet" href="{{ asset('assets/css/notes.css') }}">
+{% endblock %}
+{% block body %}
+<nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('app_check_list')}}">Zadania</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_budget')}}">Budżet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_guest')}}">Goście</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_note')}}">Notatki</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_contact')}}">Kontakty</a>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Calendar.html">Kalendarz</a>
+                    </li>
+                    -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Ustawienia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_index')}}">Wyloguj</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+<div class="content">
+        <h1>Miejsce do sporządzenia notatek</h1>
+
+        <div class="row">
+            <div class="col-10">
+                <a class="btn" id="add_new" href="#" role="button">
+                    Dodaj notatkę
+                </a>
+            </div>
+        </div>
+
+        <div class="container">
+            <ul>
+                <li>
+                    <a href="#">
+                        <input type="text" id="title" name="title" placeholder="Tytuł">
+                        <textarea id="note" name="note" placeholder="Treść notatki"></textarea>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <input type="text" id="title" name="title" placeholder="Tytuł">
+                        <textarea id="note" name="note" placeholder="Treść notatki"></textarea>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <input type="text" id="title" name="title" placeholder="Tytuł">
+                        <textarea id="note" name="note" placeholder="Treść notatki"></textarea>
+                    </a>
+                </li>
+                <li class="addSticky" id="board">
+                </li>
+
+            </ul>
+
+
+        </div>
+
+
+        <script>
+
+            var noteTemp = '<a class="note" style="overflow: hidden;">'
+                + '<input  type="text" id="title" name="title" placeholder="Tytuł">'
+                + '<textarea id="note" name="note" placeholder="Treść notatki"></textarea>'
+                + '</a>';
+
+            var noteZindex = 1;
+
+            function newNote() {
+                $(noteTemp).hide().appendTo("#board").show("fade", 300).draggable().on('dragstart',
+                    function () {
+                        $(this).zIndex(++noteZindex);
+                    });
+
+                $('textarea').autogrow();
+
+
+                $('.note')
+                return false;
+
+            };
+
+
+
+            $(document).ready(function () {
+
+
+                $("#board").height($(document).height());
+
+                $("#add_new").click(newNote);
+
+                $('.remove').click(deleteNote);
+
+                newNote();
+
+
+                return false;
+            });
+
+            function scroll() {
+                const tx = document.querySelectorAll('#note');
+                for (let i = 0; i < tx.length; i++) {
+                    tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+                    tx[i].addEventListener("input", OnInput, false);
+                }
+
+                function OnInput() {
+                    this.style.height = "auto";
+                    this.style.height = (this.scrollHeight) + "px";
+                }
+
+            }
+
+
+        </script>
+{% endblock %}
