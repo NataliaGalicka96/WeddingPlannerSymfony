@@ -11,6 +11,11 @@ class BudgetController extends AbstractController
     #[Route('/budget', name: 'app_budget')]
     public function index(): Response
     {
+
+        if(!$this->getUser()){
+            return $this->redirectToRoute('app_index');
+        }
+
         return $this->render('budget/index.html.twig', [
             'controller_name' => 'BudgetController',
         ]);
