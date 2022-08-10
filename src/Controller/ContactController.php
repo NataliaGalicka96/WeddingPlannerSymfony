@@ -11,7 +11,9 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'app_contact')]
     public function index(): Response
     {
-
+        if(!$this->getUser()){
+            return $this->redirectToRoute('app_index');
+        }
         
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'ContactController',

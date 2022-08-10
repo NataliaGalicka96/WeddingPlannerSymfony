@@ -12,7 +12,9 @@ class BudgetController extends AbstractController
     public function index(): Response
     {
 
-
+        if(!$this->getUser()){
+            return $this->redirectToRoute('app_index');
+        }
 
         return $this->render('budget/index.html.twig', [
             'controller_name' => 'BudgetController',
