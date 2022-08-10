@@ -34,12 +34,15 @@
           <div class="input-group">
             <i class="fa-solid fa-lock"></i>
             <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
           </div>
         </div>
-
+       
             <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+      value="{{ csrf_token('authenticate') }}">
+       
+
+
         <!--
         <div class="row mb-3 form-check">
           <div class="pass">
