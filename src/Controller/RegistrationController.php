@@ -38,6 +38,7 @@ class RegistrationController extends AbstractController
 
 
         $user = new User();
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -52,6 +53,10 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+
+
+        
+            /*
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
@@ -68,6 +73,7 @@ class RegistrationController extends AbstractController
                 $authenticator,
                 $request
             );
+            */
 
         }
 
@@ -96,6 +102,6 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_register');
     }
+    */
 }
-*/
-}
+
