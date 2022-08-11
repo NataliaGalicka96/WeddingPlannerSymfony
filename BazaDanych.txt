@@ -1,0 +1,45 @@
+--
+-- Struktura tabeli dla tabeli `tasks_category_default`
+--
+
+CREATE TABLE `tasks_category_default` (
+  `id` int(11) UNSIGNED NOT NULL PRIMARY KEY,
+  `name` varchar(255) COLLATE utf8_polish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `tasks_category_default`
+--
+
+INSERT INTO `tasks_category_default` (`id`, `name`) VALUES
+(1, 'Etap planowania'),
+(2, 'Sala weselna'),
+(3, 'Fotograf'),
+(4, 'Kamerzysta'),
+(5, 'Oprawa muzyczna wesela'),
+(6, 'Goście'),
+(7, 'Podziękowania'),
+(8, 'Papeteria'),
+(9, 'Obrączki'),
+(10, 'Pierwszy taniec'),
+(11, 'Panna Młoda'),
+(12, 'Pan Młody'),
+(13, 'Kościół, USC'),
+(14, 'Przygotowania'),
+(15, 'Transport i nocleg'),
+(16, 'Kwiaty i dekoracje'),
+(18, 'Dodatkowo');
+
+
+--
+-- Struktura tabeli dla tabeli `tasks_category_default`
+--
+
+CREATE TABLE `tasks_category_default` (
+  `id` int(11) UNSIGNED NOT NULL PRIMARY KEY,
+  `name` varchar(255) COLLATE utf8_polish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `tasks_category_default`
+--
