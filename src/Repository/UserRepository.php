@@ -56,6 +56,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->add($user, true);
     }
 
+
+    
+    public function copy_default_podcategory_task()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql='INSERT INTO check_list_podcategory_assigned_to_users (user_id, name) 
+        SELECT user.id, check_list_podcategory.name 
+        FROM user, check_list_podcategory 
+        WHERE user.id = (SELECT max(id) FROM user)';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+        
+    }
+
+
+    
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

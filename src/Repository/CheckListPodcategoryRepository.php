@@ -39,6 +39,41 @@ class CheckListPodcategoryRepository extends ServiceEntityRepository
         }
     }
 
+    /*
+    public function getPodcategoryAssignedToUser($userId)
+    {
+        
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM check_list_podcategory_assigned_to_users 
+        WHERE user_id = :user_id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+
+
+        return $resultSet->fetchAllAssociative();
+
+    }
+    */
+
+    public function getNameOfCategory($userId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM check_list_podcategory_assigned_to_users AS clpatu
+        JOIN check_list_podcategory clp ON clp.name = clpatu.name
+        WHERE clpatu.user_id = :user_id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+
+
+        return $resultSet->fetchAllAssociative();
+    }
+
+
+
+
+
 //    /**
 //     * @return CheckListPodcategory[] Returns an array of CheckListPodcategory objects
 //     */

@@ -39,6 +39,21 @@ class CheckListCategoryRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function getNameAndIdOfCategory()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM check_list_category";
+        
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+
+        return $resultSet->fetchAllAssociative();
+    }
+
+
+
 //    /**
 //     * @return CheckListCategory[] Returns an array of CheckListCategory objects
 //     */
