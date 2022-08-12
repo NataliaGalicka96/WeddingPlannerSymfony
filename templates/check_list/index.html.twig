@@ -48,126 +48,43 @@
             </div>
         </div>
     </nav>
-
+ 
+   
     <h1>Lista zadań do wykonania</h1>
     <div class="wrapper">
         <form>
-            <div class="dropdown mb-3 mt-5">
+        {% for cat in idOfCategory %}
+            <div class="dropdown mb-4 mt-1">
+                 
                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    Sala Weselna
+                    {{ cat['name'] }}
                 </button>
+                
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    {% for podcat in podcategoryName %}
+                    {% if cat['id'] == podcat['category_id'] %}
                     <li>
                         <div class="input-group mb-3 mt-1">
                             <div class="input-group-text">
                                 <input class="form-check-input mt-0" type="checkbox" value=""
                                     aria-label="Checkbox for following text input">
                             </div>
-                            <span class="input-group-text" id="task">Wybierz salę weselną</span>
+                            <span class="input-group-text" id="task">{{podcat['name']}}</span>
                             <span class="input-group-text"><i class="fa-solid fa-trash-can"></i></span>
+                            
+                            
+                            
                         </div>
-                    </li>
-                    <li>
-                        <div class="input-group mb-3 mt-1">
-                            <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                    aria-label="Checkbox for following text input">
-                            </div>
-                            <span class="input-group-text" id="task">Wybierz salę weselną</span>
-                            <span class="input-group-text"><i class="fa-solid fa-trash-can"></i></span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="input-group mb-3 mt-1">
-                            <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                    aria-label="Checkbox for following text input">
-                            </div>
-                            <span class="input-group-text" id="task">Wybierz salę weselną</span>
-                            <span class="input-group-text"><i class="fa-solid fa-trash-can"></i></span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="input-group mb-3 mt-1">
-                            <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                    aria-label="Checkbox for following text input">
-                            </div>
-                            <span class="input-group-text" id="task">Wybierz salę weselną</span>
-                            <span class="input-group-text"><i class="fa-solid fa-trash-can"></i></span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="input-group mb-3 mt-1">
-                            <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                    aria-label="Checkbox for following text input">
-                            </div>
-                            <span class="input-group-text" id="task">Wybierz salę weselną</span>
-                            <span class="input-group-text"><i class="fa-solid fa-trash-can"></i></span>
-                        </div>
-                    </li>
-                    <div id="addNewTask">
-                        <button class="btn" type="button" id="buttonToAddNewTask" data-bs-toggle="modal"
-                            data-bs-target="#addNewTaskModal">Dodaj zadanie</button>
-                    </div>
+                    </li>{% endif %}
+                    {% endfor %}
                 </ul>
             </div>
-
-
-            <div class=" dropdown mb-3 mt-1">
-                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Panna Młoda
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li>
-                        <div class="input-group mb-3 mt-1">
-                            <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                    aria-label="Checkbox for following text input">
-                            </div>
-                            <span class="input-group-text" id="task">Wybierz salę weselną</span>
-                            <span class="input-group-text"><i class="fa-solid fa-trash-can"></i></span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="input-group mb-3 mt-1">
-                            <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                    aria-label="Checkbox for following text input">
-                            </div>
-                            <span class="input-group-text" id="task">Zarezerwuj salę weselną</span>
-                            <span class="input-group-text"><i class="fa-solid fa-trash-can"></i></span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="input-group mb-3 mt-1">
-                            <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                    aria-label="Checkbox for following text input">
-                            </div>
-                            <span class="input-group-text" id="task">Wybierz salę weselną</span>
-                            <span class="input-group-text"><i class="fa-solid fa-trash-can"></i></span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="input-group mb-3 mt-1">
-                            <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                    aria-label="Checkbox for following text input">
-                            </div>
-                            <span class="input-group-text" id="task">Wybierz salę weselną</span>
-                            <span class="input-group-text"><i class="fa-solid fa-trash-can"></i></span>
-                        </div>
-                    </li>
-                    <div id="addNewTask">
+            {% endfor %}
+            <div id="addNewTask" class="mt-5">
                         <button class="btn" type="button" id="buttonToAddNewTask" data-bs-toggle="modal"
                             data-bs-target="#addNewTaskModal">Dodaj zadanie</button>
-                    </div>
-                </ul>
-            </div>
+                </div>
         </form>
     </div>
 
@@ -186,16 +103,28 @@
                 </div>
                 <div class="modal-body">
                     <form>
+
+
+                        <div class="mb-3">
+                        
+                            <select class="form-control" name="category" id="floatingInput"
+                                    required>
+                                    <option value="" disabled selected hidden>Wybierz kategorię</option>
+                                    {% for cat in idOfCategory %}
+                                    <option>{{ cat['name'] }}</option>
+                                    {% endfor %}
+                            </select>
+                        </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="..." name="task">
                             <label for="floatingInput">Nowe zadanie</label>
                         </div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class=" btn btn-success" id="accept">Save changes</button>
+                    <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Zamknij</button>
+                    <button type="button" class=" btn btn-success" id="accept">Zapisz</button>
                 </div>
             </div>
         </div>

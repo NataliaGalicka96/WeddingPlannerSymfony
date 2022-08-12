@@ -5,6 +5,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\CheckListCategory;
+use App\Entity\CheckListPodcategory;
+use App\Entity\User;
+use App\Form\AddNewTaskType;
+
 
 class CheckListController extends AbstractController
 {
@@ -15,8 +20,24 @@ class CheckListController extends AbstractController
             return $this->redirectToRoute('app_index');
         }
 
+        /** 
+         * @var User $user 
+         * */
+        $user = $this->getUser();
+        if(!empty($user)){
+        $userId = $user->getId();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $podcategoryName = $em->getRepository(CheckListPodcategory::class)->getNameOfCategory($userId);
+        $idOfCategory = $em->getRepository(CheckListCategory::class)->getNameAndIdOfCategory();
+
+
+
         return $this->render('check_list/index.html.twig', [
-            'controller_name' => 'CheckListController',
+            'idOfCategory' => $idOfCategory,
+            'podcategoryName' => $podcategoryName       
         ]);
     }
 }
