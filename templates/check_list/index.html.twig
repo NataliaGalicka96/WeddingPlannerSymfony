@@ -103,12 +103,20 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
-                            <label for="floatingInput">Kategoria</label>
+
+
+                        <div class="mb-3">
+                        
+                            <select class="form-control" name="category" id="floatingInput"
+                                    required>
+                                    <option value="" disabled selected hidden>Wybierz kategorię</option>
+                                    {% for cat in idOfCategory %}
+                                    <option>{{ cat['name'] }}</option>
+                                    {% endfor %}
+                            </select>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="..." name="task">
                             <label for="floatingInput">Nowe zadanie</label>
                         </div>
 

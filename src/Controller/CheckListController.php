@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\CheckListCategory;
 use App\Entity\CheckListPodcategory;
-
 use App\Entity\User;
+use App\Form\AddNewTaskType;
 
 
 class CheckListController extends AbstractController
@@ -34,10 +34,10 @@ class CheckListController extends AbstractController
         $idOfCategory = $em->getRepository(CheckListCategory::class)->getNameAndIdOfCategory();
 
 
+
         return $this->render('check_list/index.html.twig', [
             'idOfCategory' => $idOfCategory,
-            'podcategoryName' => $podcategoryName
-            
+            'podcategoryName' => $podcategoryName       
         ]);
     }
 }
