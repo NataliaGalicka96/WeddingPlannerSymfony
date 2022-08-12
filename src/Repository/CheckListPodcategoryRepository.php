@@ -59,7 +59,8 @@ class CheckListPodcategoryRepository extends ServiceEntityRepository
     public function getNameOfCategory($userId)
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "SELECT * FROM check_list_podcategory_assigned_to_users AS clpatu
+        
+        $sql = "SELECT * FROM check_list_assigned_to_user AS clpatu
         JOIN check_list_podcategory clp ON clp.name = clpatu.name
         WHERE clpatu.user_id = :user_id";
 

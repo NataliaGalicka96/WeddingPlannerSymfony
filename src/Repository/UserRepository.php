@@ -62,7 +62,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql='INSERT INTO check_list_podcategory_assigned_to_users (user_id, name) 
+        $sql='INSERT INTO check_list_assigned_to_user (user_id, name) 
         SELECT user.id, check_list_podcategory.name 
         FROM user, check_list_podcategory 
         WHERE user.id = (SELECT max(id) FROM user)';

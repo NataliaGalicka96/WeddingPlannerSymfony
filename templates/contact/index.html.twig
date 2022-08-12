@@ -76,23 +76,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% for contact in contacts %}
                     <tr>
-                        <td data-label="Imię i nazwisko">Mariusz Galicki</td>
-                        <td data-label="Adres">ul. Projektowana 6a, 05-080 Izabelin C
-                        </td>
-                        <td data-label="E-mail">nataliagalicka@gmail.com</td>
-                        <td data-label="Telefon">459 345 230</td>
+                        <td data-label="Imię i nazwisko">{{ contact["name"] }}</td>
+                        <td data-label="Adres">ul. {{ contact["street"] }} {{ contact['home_number'] }}, {{ contact['postalcode'] }} {{ contact["city"] }}</td>
+                        <td data-label="E-mail">{{ contact["email"] }}</td>
+                        <td data-label="Telefon">{{ contact["phone_number"] }}</td>
 
                     </tr>
-                    <tr>
-                        <td data-label="Imię i nazwisko">Mikołaj Galicki</td>
-                        <td data-label="Adres">ul. Projektowana 6a, 05-080 Izabelin C
-                        </td>
-                        <td data-label="E-mail">nataliagalicka@gmail.com</td>
-                        <td data-label="Telefon">459 345 230</td>
-
-                    </tr>
-
+                    {% endfor %}
+                    
                 </tbody>
             </table>
 
