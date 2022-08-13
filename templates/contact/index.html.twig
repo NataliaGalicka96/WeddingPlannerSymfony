@@ -102,18 +102,25 @@
                     <h5 class="modal-title" id="exampleModalLabel">Dodaj zadanie do wykonania</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
+
+                
                 <div class="modal-body">
-
-                    {{ form_start(formContact) }}
-                        
-                    {{ form_end(formContact) }}
-
+                {{ form_start(formContact) }}
+                    {{ form_row(formContact.name) }}
+                    {{ form_row(formContact.email) }}
+                    {{ form_row(formContact.phoneNumber) }}
+                    {{ form_row(formContact.street) }}
+                    {{ form_row(formContact.homeNumber) }}
+                    {{ form_row(formContact.city) }}
+                    {{ form_row(formContact.postalcode) }}
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class=" btn btn-success" id="accept">Save changes</button>
+                    <button type="submit" class=" btn btn-success" id="accept">Save changes</button>
                 </div>
+                 {{ form_end(formContact) }}
                 
             </div>
         </div>

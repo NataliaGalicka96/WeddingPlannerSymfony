@@ -24,6 +24,16 @@
         {% endblock %}
     </head>
     <body>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success text-center">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger text-center">
+                            {{ message }}
+                            </div>
+                        {% endfor %}
      <a class="logo" href="{{ path('app_index') }}"><img id="logo" src="{{ asset('assets/images/logo2.JPG') }}"></a>
         {% block body %}{% endblock %}
 
