@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\CheckListAssignedToUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 #[ORM\Entity(repositoryClass: CheckListAssignedToUserRepository::class)]
 class CheckListAssignedToUser
 {
