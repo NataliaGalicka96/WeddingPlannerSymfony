@@ -40,9 +40,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Contact::class)]
+    private Collection $contact;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: CheckListAssignedToUser::class)]
+    private Collection $checkListAssignedToUsers;
+
+
     public function __construct()
     {
         $this->guests = new ArrayCollection();
+        $this->contact = new ArrayCollection();
+        $this->checkListAssignedToUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,4 +191,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContact(): Collection
+    {
+        return $this->contact;
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contact->contains($contact)) {
+            $this->contact->add($contact);
+            $contact->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): self
+    {
+        if ($this->contact->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getUser() === $this) {
+                $contact->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CheckListAssignedToUser>
+     */
+    public function getCheckListAssignedToUsers(): Collection
+    {
+        return $this->checkListAssignedToUsers;
+    }
+
+    public function addCheckListAssignedToUser(CheckListAssignedToUser $checkListAssignedToUser): self
+    {
+        if (!$this->checkListAssignedToUsers->contains($checkListAssignedToUser)) {
+            $this->checkListAssignedToUsers->add($checkListAssignedToUser);
+            $checkListAssignedToUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCheckListAssignedToUser(CheckListAssignedToUser $checkListAssignedToUser): self
+    {
+        if ($this->checkListAssignedToUsers->removeElement($checkListAssignedToUser)) {
+            // set the owning side to null (unless already changed)
+            if ($checkListAssignedToUser->getUser() === $this) {
+                $checkListAssignedToUser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

@@ -6,6 +6,8 @@
    <link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}">
 {% endblock %}
 
+{% form_theme formContact 'bootstrap_5_layout.html.twig' %}
+
 {% block body %}
 <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -76,29 +78,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% for contact in contacts %}
                     <tr>
-                        <td data-label="Imię i nazwisko">Mariusz Galicki</td>
-                        <td data-label="Adres">ul. Projektowana 6a, 05-080 Izabelin C
-                        </td>
-                        <td data-label="E-mail">nataliagalicka@gmail.com</td>
-                        <td data-label="Telefon">459 345 230</td>
+                        <td data-label="Imię i nazwisko">{{ contact["name"] }}</td>
+                        <td data-label="Adres">ul. {{ contact["street"] }} {{ contact['home_number'] }}, {{ contact['postalcode'] }} {{ contact["city"] }}</td>
+                        <td data-label="E-mail">{{ contact["email"] }}</td>
+                        <td data-label="Telefon">{{ contact["phone_number"] }}</td>
 
                     </tr>
-                    <tr>
-                        <td data-label="Imię i nazwisko">Mikołaj Galicki</td>
-                        <td data-label="Adres">ul. Projektowana 6a, 05-080 Izabelin C
-                        </td>
-                        <td data-label="E-mail">nataliagalicka@gmail.com</td>
-                        <td data-label="Telefon">459 345 230</td>
-
-                    </tr>
-
+                    {% endfor %}
+                    
                 </tbody>
             </table>
 
         </div>
     </div>
-
+                    
     <!-- Modal -->
     <div class="modal fade" id="addNewContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -107,31 +102,26 @@
                     <h5 class="modal-title" id="exampleModalLabel">Dodaj zadanie do wykonania</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
-                            <label for="floatingInput">Nazwa kontatku</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
-                            <label for="floatingInput">Adres</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
-                            <label for="floatingInput">E-mail</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
-                            <label for="floatingInput">Numer telefonu</label>
-                        </div>
 
-                    </form>
+
+                
+                <div class="modal-body">
+                {{ form_start(formContact) }}
+                    {{ form_row(formContact.name) }}
+                    {{ form_row(formContact.email) }}
+                    {{ form_row(formContact.phoneNumber) }}
+                    {{ form_row(formContact.street) }}
+                    {{ form_row(formContact.homeNumber) }}
+                    {{ form_row(formContact.city) }}
+                    {{ form_row(formContact.postalcode) }}
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class=" btn btn-success" id="accept">Save changes</button>
+                    <button type="submit" class=" btn btn-success" id="accept">Save changes</button>
                 </div>
+                 {{ form_end(formContact) }}
+                
             </div>
         </div>
     </div>
