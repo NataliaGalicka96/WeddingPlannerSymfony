@@ -6,6 +6,8 @@
    <link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}">
 {% endblock %}
 
+{% form_theme formContact 'bootstrap_5_layout.html.twig' %}
+
 {% block body %}
 <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -91,7 +93,7 @@
 
         </div>
     </div>
-
+                    
     <!-- Modal -->
     <div class="modal fade" id="addNewContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -101,30 +103,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
-                            <label for="floatingInput">Nazwa kontatku</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
-                            <label for="floatingInput">Adres</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
-                            <label for="floatingInput">E-mail</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
-                            <label for="floatingInput">Numer telefonu</label>
-                        </div>
 
-                    </form>
+                    {{ form_start(formContact) }}
+                        
+                    {{ form_end(formContact) }}
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Close</button>
                     <button type="button" class=" btn btn-success" id="accept">Save changes</button>
                 </div>
+                
             </div>
         </div>
     </div>

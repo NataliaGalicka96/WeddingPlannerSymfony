@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Entity\User;
+use App\Form\ContactType;
 use App\Entity\Contact;
 
 class ContactController extends AbstractController
@@ -27,13 +27,14 @@ class ContactController extends AbstractController
         }
 
         $em = $this->getDoctrine()->getManager();
-
         $contacts = $em->getRepository(Contact::class)->getContact($userId);
 
-        var_dump($contacts);
+
+        $form = $this->createForm(ContactType::class);
         
         return $this->render('contact/index.html.twig', [
-            'contacts' => $contacts
+            'contacts' => $contacts,
+            'formContact' => $form->createView(),
         ]);
     }
 }
