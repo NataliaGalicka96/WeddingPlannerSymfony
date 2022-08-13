@@ -19,14 +19,53 @@ class GuestController extends AbstractController
             return $this->redirectToRoute('app_index');
         }
 
+        /** 
+         * @var User $user 
+         * */
+        $user = $this->getUser();
+        if(!empty($user)){
+        $userId = $user->getId();
+        }
+        $em = $this->getDoctrine()->getManager();
+        $guests = $em->getRepository(Guest::class)->getGuestAssignedToUser($userId);
+
         $form = $this->createForm(GuestType::class);
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) { 
+            if($this->getUser())
+            {
+                $newGuest = new Guest();
+
+                $newGuest->setUser($this->getUser());
+                $newGuest->setName($form->get('name')->getData());
+                $newGuest->setIsConfirmed($form->get('is_confirmed')->getData());
+                $newGuest->setIsAccommodation($form->get('is_accommodation')->getData());
+                $newGuest->setTransport($form->get('transport')->getData());
+                $newGuest->setIsAdult($form->get('is_adult')->getData());
+                $newGuest->setIsChildUnder3Years($form->get('is_child_under_3_years')->getData());
+                $newGuest->setIsChildBetween312Years($form->get('is_child_between_3_12_years')->getData());
+                $newGuest->setSpecialDiet($form->get('special_diet')->getData());
+                try{
+                    $em->persist($newGuest);
+                    $em->flush();
+                    $this->addFlash('success', "Dodano nowego gościa!");
+
+                }catch(\Exception $e) {
+                    $this->addFlash('error', 'Wystąpił nieoczekiwany błąd!');
+                }
+            }
+            
+        }
+
 
 
 
         
         return $this->render('guest/index.html.twig', [
-            'controller_name' => 'GuestController',
             'guestform' => $form->createView(),
+            'guests' => $guests,
         ]);
     }
 }

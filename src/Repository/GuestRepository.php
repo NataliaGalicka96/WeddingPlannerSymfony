@@ -39,6 +39,18 @@ class GuestRepository extends ServiceEntityRepository
         }
     }
 
+    public function getGuestAssignedToUser($userId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM guest
+        WHERE user_id = :user_id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+
+
+        return $resultSet->fetchAllAssociative();
+    }
 //    /**
 //     * @return Guest[] Returns an array of Guest objects
 //     */

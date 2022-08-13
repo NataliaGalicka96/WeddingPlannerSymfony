@@ -25,25 +25,32 @@ class GuestType extends AbstractType
                 ]
             ])
             ->add('is_confirmed', CheckboxType::class,[
-                'label' => 'Potwierdzona obecność'
+                'label' => 'Potwierdzona obecność',
+                'required' => false
             ])
             ->add('is_accommodation', CheckboxType::class,[
-                'label' => 'Nocleg'
+                'label' => 'Nocleg',
+                'required' => false
             ])
             ->add('transport', CheckboxType::class,[
-                'label' => 'Transport'
+                'label' => 'Transport',
+                'required' => false
             ])
             ->add('is_adult', CheckboxType::class,[
-                'label' => 'Osoba dorosła'
+                'label' => 'Osoba dorosła',
+                'required' => false
             ])
             ->add('is_child_under_3_years', CheckboxType::class,[
-                'label' => 'Dziecko poniżej 3 roku życia'
+                'label' => 'Dziecko poniżej 3 roku życia',
+                'required' => false
             ])
             ->add('is_child_between_3_12_years', CheckboxType::class,[
-                'label' => 'Dziecko 3-12 lat'
+                'label' => 'Dziecko 3-12 lat',
+                'required' => false
             ])
             ->add('special_diet', CheckboxType::class,[
-                'label' => 'Specjalna dieta'
+                'label' => 'Specjalna dieta',
+                'required' => false
             ])
 
         ;

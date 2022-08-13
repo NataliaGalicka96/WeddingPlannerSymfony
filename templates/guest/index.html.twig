@@ -54,7 +54,6 @@
     <h1>Lista gości</h1>
 
 
-
     <div class="container">
         <div class="row">
 
@@ -79,53 +78,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% for guest in guests %}
                     <tr>
-                        <td data-label="Imię i nazwisko">Mariusz Galicki</td>
-                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="">
+                        <td data-label="Imię i nazwisko">{{ guest["name"] }}</td>
+                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_confirmed"] == 1 %}checked{% endif %}>
                         </td>
-                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="">
+                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_accommodation"] == 1 %}checked{% endif %}></td>
+                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["transport"] == 1 %}checked{% endif %}></td>
+                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_adult"] == 1 %}checked{% endif %}>
                         </td>
                         <td data-label="Dziecko &lt; 3 lata"><input class="form-check-input mt-1" type="checkbox"
-                                value=""></td>
-                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="">
+                                value="" {% if guest["is_child_under_3_years"] == 1 %}checked{% endif %}></td>
+                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_child_between_3_12_years"] == 1 %}checked{% endif %}>
                         </td>
-                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="">
+                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["special_diet"] == 1 %}checked{% endif %}>
                         </td>
                     </tr>
-                    <tr>
-                        <td data-label="Imię i nazwisko">Mikołaj Galicki</td>
-                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Dziecko &lt; 3 lata"><input class="form-check-input mt-1" type="checkbox"
-                                value=""></td>
-                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td data-label="Imię i nazwisko">Aleksander Galicki</td>
-                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Dziecko &lt; 3 lata"><input class="form-check-input mt-1" type="checkbox"
-                                value=""></td>
-                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-
-                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
 
