@@ -9,8 +9,7 @@ use App\Entity\CheckListCategory;
 use App\Entity\CheckListPodcategory;
 use App\Entity\User;
 
-use App\Form\TaskType;
-use App\Entity\CheckListAssignedToUser;
+
 
 
 class CheckListController extends AbstractController
@@ -35,13 +34,13 @@ class CheckListController extends AbstractController
         $podcategoryName = $em->getRepository(CheckListPodcategory::class)->getNameOfCategory($userId);
         $idOfCategory = $em->getRepository(CheckListCategory::class)->getNameAndIdOfCategory();
 
-        $form = $this->createForm(TaskType::class);
+
     
 
         return $this->render('check_list/index.html.twig', [
             'idOfCategory' => $idOfCategory,
             'podcategoryName' => $podcategoryName,
-            'taskform' => $form->createView(),       
+     
         ]);
     }
 }

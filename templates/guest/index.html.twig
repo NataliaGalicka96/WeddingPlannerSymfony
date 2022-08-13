@@ -5,6 +5,9 @@
 {% block stylesheets %}
    <link rel="stylesheet" href="{{ asset('assets/css/guests.css') }}">
 {% endblock %}
+
+{% form_theme guestform 'bootstrap_5_layout.html.twig' %}
+
 {% block body %}
 <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -50,6 +53,7 @@
 
     <h1>Lista gości</h1>
 
+
     <div class="container">
         <div class="row">
 
@@ -60,7 +64,6 @@
                 </a>
             </div>
         </div>
-        <form action="#" method="POST">
             <table id="guests">
                 <thead>
                     <tr>
@@ -75,56 +78,26 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% for guest in guests %}
                     <tr>
-                        <td data-label="Imię i nazwisko">Mariusz Galicki</td>
-                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="">
+                        <td data-label="Imię i nazwisko">{{ guest["name"] }}</td>
+                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_confirmed"] == 1 %}checked{% endif %}>
                         </td>
-                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="">
+                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_accommodation"] == 1 %}checked{% endif %}></td>
+                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["transport"] == 1 %}checked{% endif %}></td>
+                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_adult"] == 1 %}checked{% endif %}>
                         </td>
                         <td data-label="Dziecko &lt; 3 lata"><input class="form-check-input mt-1" type="checkbox"
-                                value=""></td>
-                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="">
+                                value="" {% if guest["is_child_under_3_years"] == 1 %}checked{% endif %}></td>
+                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_child_between_3_12_years"] == 1 %}checked{% endif %}>
                         </td>
-                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="">
+                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["special_diet"] == 1 %}checked{% endif %}>
                         </td>
                     </tr>
-                    <tr>
-                        <td data-label="Imię i nazwisko">Mikołaj Galicki</td>
-                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Dziecko &lt; 3 lata"><input class="form-check-input mt-1" type="checkbox"
-                                value=""></td>
-                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td data-label="Imię i nazwisko">Aleksander Galicki</td>
-                        <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Nocleg"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Transport"><input class="form-check-input mt-1" type="checkbox" value=""></td>
-                        <td data-label="Osoba dorosła"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Dziecko &lt; 3 lata"><input class="form-check-input mt-1" type="checkbox"
-                                value=""></td>
-                        <td data-label="Dziecko 3-12 lat"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-                        <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="">
-                        </td>
-
-                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
-        </form>
+
 
         <h1>Podsumowanie</h1>
 
@@ -164,49 +137,24 @@
                     <h5 class="modal-title" id="exampleModalLabel">Dodaj nowego gościa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                
                 <div class="modal-body">
-                    <form>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
-                            <label for="floatingInput">Imię i nazwisko</label>
-                        </div>
-                        <div>
-                            <label>Potwierdzone</label>
-                            <input class="form-check-input mt-1" type="checkbox" value="">
-                        </div>
-                        <div>
-                            <label>Nocleg</label>
-                            <input class="form-check-input mt-1" type="checkbox" value="">
-                        </div>
-                        <div>
-                            <label>Transport</label>
-                            <input class="form-check-input mt-1" type="checkbox" value="">
-                        </div>
-                        <div>
-                            <label>Osoba dorosła</label>
-                            <input class="form-check-input mt-1" type="checkbox" value="">
-                        </div>
-                        <div>
-                            <label>Dziecko &lt; 3 lata </label>
-                            <input class="form-check-input mt-1" type="checkbox" value="">
-                        </div>
-                        <div>
-                            <label>Dziecko 3-12 lat</label>
-                            <input class="form-check-input mt-1" type="checkbox" value="">
-                        </div>
-                        <div>
-                            <label>Specjalna dieta</label>
-                            <input class="form-check-input mt-1" type="checkbox" value="">
-                        </div>
+                {{ form_start(guestform) }}  
+                    {{ form_row(guestform.name) }}  
+                    {{ form_row(guestform.is_confirmed) }}  
+                    {{ form_row(guestform.is_accommodation) }}  
+                    {{ form_row(guestform.transport) }}  
+                    {{ form_row(guestform.is_adult) }}  
+                    {{ form_row(guestform.is_child_under_3_years) }}  
+                    {{ form_row(guestform.is_child_between_3_12_years) }}  
+                    {{ form_row(guestform.special_diet) }}  
 
-
-
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class=" btn btn-success" id="accept">Save changes</button>
+                    <button type="submit" class=" btn btn-success" id="accept">Save changes</button>
                 </div>
+                {{ form_end(guestform) }}
             </div>
         </div>
     </div>
