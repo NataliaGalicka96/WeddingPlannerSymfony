@@ -46,12 +46,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: CheckListAssignedToUser::class)]
     private Collection $checkListAssignedToUsers;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: CheckCategoryAssignedToUser::class)]
+    private Collection $checkCategoryAssignedToUsers;
+
 
     public function __construct()
     {
         $this->guests = new ArrayCollection();
         $this->contact = new ArrayCollection();
         $this->checkListAssignedToUsers = new ArrayCollection();
+        $this->checkCategoryAssignedToUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -246,6 +250,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($checkListAssignedToUser->getUser() === $this) {
                 $checkListAssignedToUser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CheckCategoryAssignedToUser>
+     */
+    public function getCheckCategoryAssignedToUsers(): Collection
+    {
+        return $this->checkCategoryAssignedToUsers;
+    }
+
+    public function addCheckCategoryAssignedToUser(CheckCategoryAssignedToUser $checkCategoryAssignedToUser): self
+    {
+        if (!$this->checkCategoryAssignedToUsers->contains($checkCategoryAssignedToUser)) {
+            $this->checkCategoryAssignedToUsers->add($checkCategoryAssignedToUser);
+            $checkCategoryAssignedToUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCheckCategoryAssignedToUser(CheckCategoryAssignedToUser $checkCategoryAssignedToUser): self
+    {
+        if ($this->checkCategoryAssignedToUsers->removeElement($checkCategoryAssignedToUser)) {
+            // set the owning side to null (unless already changed)
+            if ($checkCategoryAssignedToUser->getUser() === $this) {
+                $checkCategoryAssignedToUser->setUser(null);
             }
         }
 

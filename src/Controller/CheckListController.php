@@ -9,6 +9,8 @@ use App\Entity\CheckListCategory;
 use App\Entity\CheckListPodcategory;
 use App\Entity\User;
 
+use Symfony\Component\HttpFoundation\Request;
+
 
 
 
@@ -45,8 +47,24 @@ class CheckListController extends AbstractController
     }
 
     #[Route('/check/list/create', name: 'create_new_task', methods: 'POST')]
-    public function createNewTask()
+    public function createNewTask(Request $request)
     {
+
+        $title = trim($request->request->get('title'));
+        
+        if(empty($title))
+        return $this->redirectToRoute('app_check_list');
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $task = new CheckListAssignedToUser();
+
+        $task->setName($title);
+        $task->setUser($this->getUser());
+
+        $entityManager->persist($task);
+        $entityManager->flush();
+
         return $this->render('check_list/index.html.twig', [
 
      

@@ -24,6 +24,8 @@ class CheckListAssignedToUser
     #[ORM\Column(nullable: true)]
     private ?bool $status = null;
 
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,4 +66,6 @@ class CheckListAssignedToUser
 
         return $this;
     }
+
+
 }

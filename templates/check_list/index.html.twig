@@ -105,12 +105,13 @@
                                     required>
                                     <option value="" disabled selected hidden>Wybierz kategorię</option>
                                     {% for cat in idOfCategory %}
-                                    <option>{{ cat['name'] }}</option>
+                                    <option name="category">{{ cat['name'] }}</option>
+                                    <option type="hidden" name="categoryOldId"></option>
                                     {% endfor %}
                             </select>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="..." name="task">
+                            <input name = "title" type="text" class="form-control" id="floatingInput" placeholder="..." name="task">
                             <label for="floatingInput">Nowe zadanie</label>
                         </div>
 
