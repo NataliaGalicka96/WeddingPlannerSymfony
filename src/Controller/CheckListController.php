@@ -43,4 +43,29 @@ class CheckListController extends AbstractController
      
         ]);
     }
+
+    #[Route('/check/list/create', name: 'create_new_task', methods: 'POST')]
+    public function createNewTask()
+    {
+        return $this->render('check_list/index.html.twig', [
+
+     
+        ]);
+    }
+
+    #[Route('/check/list/switch-status/{id}', name: 'switch_status')]
+ 
+    public function switchStatus($id)
+    {
+          exit('to do: switch status of the task!'. $id);
+    }
+
+    #[Route('check_list/delete/{id}', name: 'task_delete')]
+ 
+    public function delete($id)
+    {
+        exit('to do: delete a task with the id of !'. $id);
+    }
+
+
 }
