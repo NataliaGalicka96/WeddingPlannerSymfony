@@ -78,7 +78,15 @@ class CheckListController extends AbstractController
  
     public function switchStatus($id)
     {
-          exit('to do: switch status of the task!'. $id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $task = $entityManager->getRepository(CheckList::class)->find($id);
+    
+        $task->setStatus(! $task->isStatus() );
+        
+        $entityManager->persist($task);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_check_list');
     }
 
     #[Route('check_list/delete/{id}', name: 'task_delete')]

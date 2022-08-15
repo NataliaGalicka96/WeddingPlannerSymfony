@@ -64,15 +64,20 @@
                     {% if category['name'] == task['category_name'] %}
                     <li>
                         <div class="input-group mb-3 mt-1">
+                        {#}
                             <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                    aria-label="Checkbox for following text input">
-                            </div>
-                            <span class="input-group-text" id="task">{{task['task']}}</span>
-                            <span class="input-group-text" onclick="return confirm('Are you sure to delete?')" href="{{path('task_delete', {'id':1})}}"><i class="fa-solid fa-trash-can"></i></span>
-                            
+                            <a href="{{path('switch_status',{'id':task["id"]})}}">  
+                            <input class="form-check-input mt-0" type="checkbox" role="button" value=""
+                                    aria-label="Checkbox for following text input" {% if task["status"]%}checked{% endif %}></a>
+                             </div>
+                             #}
+                            <a href="{{path('switch_status',{'id':task["id"]})}}"> <span  id="task" {% if task["status"]%}class="input-group-text checked"{% else %}class="input-group-text"{% endif %} >{{task['task']}}</span></a>
+                            <span class="input-group-text" onclick="return confirm('Czy na pewno chcesz usunąć zadanie?')" href="{{path('task_delete', {'id':1})}}"><i class="fa-solid fa-trash-can"></i></span>  
+                        
                         </div>
-                    </li>{% endif %}
+                        
+                    </li>
+                    {% endif %}
                     {% endfor %}
                 </ul>
             </div>
