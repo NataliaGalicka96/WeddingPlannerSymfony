@@ -79,6 +79,7 @@
                 </thead>
                 <tbody>
                 {% for guest in guests %}
+                    
                     <tr>
                         <td data-label="Imię i nazwisko">{{ guest["name"] }}</td>
                         <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_confirmed"] == 1 %}checked{% endif %}>

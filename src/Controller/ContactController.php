@@ -53,9 +53,13 @@ class ContactController extends AbstractController
                     $em->persist($newContact);
                     $em->flush();
                     $this->addFlash('success', "Dodano nowy kontakt!");
+                    return $this->redirectToRoute('app_contact');
+
 
                 }catch(\Exception $e) {
                     $this->addFlash('error', 'Wystąpił nieoczekiwany błąd!');
+                    return $this->redirectToRoute('app_contact');
+
                 }
                 
 
