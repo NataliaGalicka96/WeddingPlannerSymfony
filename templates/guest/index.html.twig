@@ -79,6 +79,7 @@
                 </thead>
                 <tbody>
                 {% for guest in guests %}
+                    
                     <tr>
                         <td data-label="Imię i nazwisko">{{ guest["name"] }}</td>
                         <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_confirmed"] == 1 %}checked{% endif %}>
@@ -139,7 +140,7 @@
                 </div>
                 
                 <div class="modal-body">
-                {{ form_start(guestform) }}  
+                {{ form_start(guestform)}}
                     {{ form_row(guestform.name) }}  
                     {{ form_row(guestform.is_confirmed) }}  
                     {{ form_row(guestform.is_accommodation) }}  
