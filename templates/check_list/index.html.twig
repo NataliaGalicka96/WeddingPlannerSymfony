@@ -61,6 +61,7 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     {% for task in taskAssignedToUser %}
+
                     {% if category['name'] == task['category_name'] %}
                     <li>
                         <div class="input-group mb-3 mt-1">
@@ -72,12 +73,14 @@
                              </div>
                              #}
                             <a href="{{path('switch_status',{'id':task["id"]})}}"> <span  id="task" {% if task["status"]%}class="input-group-text checked"{% else %}class="input-group-text"{% endif %} >{{task['task']}}</span></a>
-                            <span class="input-group-text" onclick="return confirm('Czy na pewno chcesz usunąć zadanie?')" href="{{path('task_delete', {'id':1})}}"><i class="fa-solid fa-trash-can"></i></span>  
+                            <a onclick="return confirm('Czy na pewno chcesz usunąć to zadanie?')" href="{{path('task_delete',{'id':task.id})}}"><span class="input-group-text" ><i class="fa-solid fa-trash-can"></i></span></a>  
                         
                         </div>
                         
                     </li>
+                    
                     {% endif %}
+                    
                     {% endfor %}
                 </ul>
             </div>

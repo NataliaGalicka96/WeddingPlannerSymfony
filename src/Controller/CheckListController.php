@@ -91,9 +91,12 @@ class CheckListController extends AbstractController
 
     #[Route('check_list/delete/{id}', name: 'task_delete')]
  
-    public function delete($id)
+    public function delete(CheckList $id)
     {
-        exit('to do: delete a task with the id of !'. $id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($id);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_check_list');
     }
 
 
