@@ -21,6 +21,12 @@ class CheckListAssignedToUser
     #[ORM\ManyToOne(inversedBy: 'checkListAssignedToUsers')]
     private ?User $user = null;
 
+
+    #[ORM\Column]
+    private ?int $category_id = null;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -49,4 +55,19 @@ class CheckListAssignedToUser
 
         return $this;
     }
+
+    
+    public function getCategoryId(): ?int
+    {
+        return $this->category_id;
+    }
+
+    public function setCategoryId(int $category_id): self
+    {
+        $this->category_id = $category_id;
+
+        return $this;
+    }
+
+
 }
