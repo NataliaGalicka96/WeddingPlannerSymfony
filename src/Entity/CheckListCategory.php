@@ -21,9 +21,12 @@ class CheckListCategory
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: CheckListPodcategory::class)]
     private Collection $checkListPodcategories;
 
+
+
     public function __construct()
     {
         $this->checkListPodcategories = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -72,4 +75,6 @@ class CheckListCategory
 
         return $this;
     }
+
+    
 }

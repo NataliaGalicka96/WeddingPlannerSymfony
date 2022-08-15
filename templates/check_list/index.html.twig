@@ -53,22 +53,22 @@
     <h1>Lista zadań do wykonania</h1>
     <div class="wrapper">
         <form>
-        {% for cat in idOfCategory %}
+        {% for category in idOfCategory %}
             <div class="dropdown mb-4 mt-1">
                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    {{ cat['name'] }}
+                    {{ category['name'] }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    {% for podcat in podcategoryName %}
-                    {% if cat['id'] == podcat['category_id'] %}
+                    {% for task in taskAssignedToUser %}
+                    {% if category['name'] == task['category_name'] %}
                     <li>
                         <div class="input-group mb-3 mt-1">
                             <div class="input-group-text">
                                 <input class="form-check-input mt-0" type="checkbox" value=""
                                     aria-label="Checkbox for following text input">
                             </div>
-                            <span class="input-group-text" id="task">{{podcat['name']}}</span>
+                            <span class="input-group-text" id="task">{{task['task']}}</span>
                             <span class="input-group-text" onclick="return confirm('Are you sure to delete?')" href="{{path('task_delete', {'id':1})}}"><i class="fa-solid fa-trash-can"></i></span>
                             
                         </div>
@@ -104,9 +104,8 @@
                             <select class="form-control" name="category" id="floatingInput"
                                     required>
                                     <option value="" disabled selected hidden>Wybierz kategorię</option>
-                                    {% for cat in idOfCategory %}
-                                    <option name="category">{{ cat['name'] }}</option>
-                                    <option type="hidden" name="categoryOldId"></option>
+                                    {% for category in idOfCategory %}
+                                    <option name="category">{{ category['name'] }}</option>
                                     {% endfor %}
                             </select>
                         </div>

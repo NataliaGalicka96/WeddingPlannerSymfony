@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\CheckCategoryAssignedToUser;
+use App\Entity\CheckList;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CheckCategoryAssignedToUser>
+ * @extends ServiceEntityRepository<CheckList>
  *
- * @method CheckCategoryAssignedToUser|null find($id, $lockMode = null, $lockVersion = null)
- * @method CheckCategoryAssignedToUser|null findOneBy(array $criteria, array $orderBy = null)
- * @method CheckCategoryAssignedToUser[]    findAll()
- * @method CheckCategoryAssignedToUser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CheckList|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CheckList|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CheckList[]    findAll()
+ * @method CheckList[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CheckCategoryAssignedToUserRepository extends ServiceEntityRepository
+class CheckListRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CheckCategoryAssignedToUser::class);
+        parent::__construct($registry, CheckList::class);
     }
 
-    public function add(CheckCategoryAssignedToUser $entity, bool $flush = false): void
+    public function add(CheckList $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class CheckCategoryAssignedToUserRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(CheckCategoryAssignedToUser $entity, bool $flush = false): void
+    public function remove(CheckList $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -39,26 +39,23 @@ class CheckCategoryAssignedToUserRepository extends ServiceEntityRepository
         }
     }
 
-    /*
-    public function getCategoryAssignedToUser($userId)
+    public function getTaskAssignedToUser($userId)
     {
+        
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "SELECT * FROM check_category_assigned_to_user
-                WHERE user_id = :user_id";
+        $sql = "SELECT * FROM check_list
+        WHERE user_id = :user_id";
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['user_id' => $userId]);
 
 
         return $resultSet->fetchAllAssociative();
+
     }
-    */
-
-
-
 
 //    /**
-//     * @return CheckCategoryAssignedToUser[] Returns an array of CheckCategoryAssignedToUser objects
+//     * @return CheckList[] Returns an array of CheckList objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -72,7 +69,7 @@ class CheckCategoryAssignedToUserRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?CheckCategoryAssignedToUser
+//    public function findOneBySomeField($value): ?CheckList
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

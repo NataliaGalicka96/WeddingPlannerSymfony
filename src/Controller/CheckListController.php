@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\CheckListCategory;
 use App\Entity\CheckListPodcategory;
+use App\Entity\CheckList;
 use App\Entity\User;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -32,16 +33,19 @@ class CheckListController extends AbstractController
         }
 
         $em = $this->getDoctrine()->getManager();
-
+/*
         $podcategoryName = $em->getRepository(CheckListPodcategory::class)->getNameOfCategory($userId);
+*/        
         $idOfCategory = $em->getRepository(CheckListCategory::class)->getNameAndIdOfCategory();
 
+        $taskAssignedToUser= $em->getRepository(CheckList::class)->getTaskAssignedToUser($userId);
 
     
 
         return $this->render('check_list/index.html.twig', [
             'idOfCategory' => $idOfCategory,
-            'podcategoryName' => $podcategoryName,
+          // 'podcategoryName' => $podcategoryName,
+            'taskAssignedToUser' => $taskAssignedToUser
      
         ]);
     }
@@ -50,6 +54,7 @@ class CheckListController extends AbstractController
     public function createNewTask(Request $request)
     {
 
+        $category = trim($request->request->get('category'));
         $title = trim($request->request->get('title'));
         
         if(empty($title))
@@ -57,18 +62,16 @@ class CheckListController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        $task = new CheckListAssignedToUser();
+        $task = new CheckList();
 
-        $task->setName($title);
+        $task->setCategoryName($category);
+        $task->setTask($title);
         $task->setUser($this->getUser());
 
         $entityManager->persist($task);
         $entityManager->flush();
 
-        return $this->render('check_list/index.html.twig', [
-
-     
-        ]);
+        return $this->redirectToRoute('app_check_list');
     }
 
     #[Route('/check/list/switch-status/{id}', name: 'switch_status')]

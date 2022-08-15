@@ -57,13 +57,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
 
-    
+  
     public function copy_default_podcategory_task()
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql='INSERT INTO check_list_assigned_to_user (user_id, name) 
-        SELECT user.id, check_list_podcategory.name 
+        $sql='INSERT INTO check_list_assigned_to_user (user_id, name, category_id) 
+        SELECT user.id, check_list_podcategory.name, check_list_podcategory.category_id 
         FROM user, check_list_podcategory 
         WHERE user.id = (SELECT max(id) FROM user)';
 
@@ -73,6 +73,57 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $resultSet->fetchAllAssociative();
         
     }
+
+    /*
+    public function copy_default_category_task()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql='INSERT INTO check_category_assigned_to_user (user_id, name)
+        SELECT user.id, check_list_category.name
+        FROM user, check_list_category
+        WHERE user.id = (SELECT max(id) FROM user)';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+
+    }
+
+    public function copy_default_task()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql='INSERT INTO check_category_assigned_to_user (user_id, name)
+        SELECT user.id, check_list_category.name
+        FROM user, check_list_category
+        WHERE user.id = (SELECT max(id) FROM user)';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+
+    }
+    */
+
+    public function copy_default_task()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql='INSERT INTO check_list (user_id, category_name, task)
+        SELECT user.id, task_to_do.category_name, task_to_do.task
+        FROM user, task_to_do
+        WHERE user.id = (SELECT max(id) FROM user)';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+
+    }
+    
 
 
     

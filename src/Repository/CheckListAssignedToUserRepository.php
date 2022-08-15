@@ -39,6 +39,21 @@ class CheckListAssignedToUserRepository extends ServiceEntityRepository
         }
     }
 
+    /*
+    public function getListOfTaskAssignedToUser($userId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        
+        $sql = "SELECT * FROM check_list_assigned_to_user 
+        WHERE user_id = :user_id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+
+
+        return $resultSet->fetchAllAssociative();
+    }
+    */
 //    /**
 //     * @return CheckListAssignedToUser[] Returns an array of CheckListAssignedToUser objects
 //     */
