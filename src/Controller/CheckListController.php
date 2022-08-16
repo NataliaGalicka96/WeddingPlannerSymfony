@@ -44,7 +44,6 @@ class CheckListController extends AbstractController
 
         return $this->render('check_list/index.html.twig', [
             'idOfCategory' => $idOfCategory,
-          // 'podcategoryName' => $podcategoryName,
             'taskAssignedToUser' => $taskAssignedToUser
      
         ]);

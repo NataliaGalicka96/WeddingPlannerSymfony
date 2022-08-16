@@ -78,7 +78,15 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+}
+
+
+.input-group-text {
+    white-space: inherit;
 }
 
 .dropdown {
@@ -153,11 +161,17 @@ ul li a {
 
 #task {
     background-color: transparent;
-    width: inherit;
+    max-width: 500px;
+}
+
+
+#delete {
+    display: inline-block;
+    margin-left: 5px;
 }
 
 .dropdown {
-    width: 100%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -186,9 +200,42 @@ ul li a {
     box-shadow: inset 0px 0px 2px 2px #ef97aa;
 }
 
+@media screen and (max-width: 1000px) {
+    #task {
+        font-size: 15px;
+        max-width: 450px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #task {
+        font-size: 15px;
+        max-width: 400px;
+    }
+}
+
 @media screen and (max-width: 800px) {
     #task {
         font-size: 15px;
+        max-width: 360px;
+    }
+
+    .btn {
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    #task {
+        font-size: 15px;
+        max-width: 330px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #task {
+        font-size: 14px;
+        max-width: 300px;
     }
 }
 
@@ -196,6 +243,25 @@ ul li a {
 @media screen and (max-width: 650px) {
     #task {
         font-size: 14px;
+        max-width: 275px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #task {
+        font-size: 14px;
+        max-width: 250px;
+    }
+
+    .btn {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #task {
+        font-size: 14px;
+        max-width: 225px;
     }
 }
 
@@ -203,5 +269,51 @@ ul li a {
 @media screen and (max-width: 500px) {
     #task {
         font-size: 13px;
+        max-width: 190px;
+    }
+
+    .btn {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #task {
+        font-size: 12px;
+        max-width: 170px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #task {
+        font-size: 12px;
+        max-width: 160px;
+    }
+
+    .btn {
+        font-size: 14px;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+    #task {
+        font-size: 12px;
+        max-width: 140px;
+    }
+}
+
+
+@media screen and (max-width: 340px) {
+    #task {
+        font-size: 10px;
+        max-width: 125px;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    #task {
+        font-size: 10px;
+        max-width: 100px;
     }
 }
