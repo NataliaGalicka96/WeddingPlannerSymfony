@@ -48,6 +48,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: CheckList::class)]
     private Collection $checkLists;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Expenses::class)]
+    private Collection $expenses;
+
 
     public function __construct()
     {
@@ -55,6 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->contact = new ArrayCollection();
 
         $this->checkLists = new ArrayCollection();
+        $this->expenses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -251,6 +255,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($checkList->getUser() === $this) {
                 $checkList->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Expenses>
+     */
+    public function getExpenses(): Collection
+    {
+        return $this->expenses;
+    }
+
+    public function addExpense(Expenses $expense): self
+    {
+        if (!$this->expenses->contains($expense)) {
+            $this->expenses->add($expense);
+            $expense->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExpense(Expenses $expense): self
+    {
+        if ($this->expenses->removeElement($expense)) {
+            // set the owning side to null (unless already changed)
+            if ($expense->getUser() === $this) {
+                $expense->setUser(null);
             }
         }
 

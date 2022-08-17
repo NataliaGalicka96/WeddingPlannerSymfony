@@ -55,9 +55,9 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             $em = $this->getDoctrine()->getManager();
-            //$em->getRepository(User::class)->copy_default_podcategory_task();
-           // $em->getRepository(User::class)->copy_default_category_task();
+
             $em->getRepository(User::class)->copy_default_task();
+            $em->getRepository(User::class)->copy_default_expenses();
 
 
             $this->addFlash('success', "Rejestracja powiodła się!");
