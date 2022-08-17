@@ -89,27 +89,18 @@
             <div class="col-12 col-md-5">
                 <table id="allExpenses">
                     <tbody>
+                    {% for category in budgetCategory %}
                         <tr>
-                            <td class="titleOfCategory" scope="col">Ceremonia</td>
-                            <td data-label="Ceremonia">0 zł</td>
+                            <td class="titleOfCategory" scope="col">{{category["name"]}}</td>
+                            <td data-label="{{category["name"]}}">0 zł</td>
                         </tr>
-                        <tr>
-                            <td class="titleOfCategory" scope="col">Panna Młoda</td>
-                            <td data-label="Panna Młoda">0 zł</td>
-                        </tr>
-                        <tr>
-                            <td class="titleOfCategory" scope="col">Pan Młody</td>
-                            <td data-label="Pan Młody">0 zł</td>
-                        </tr>
-                        <tr>
-                            <td class="titleOfCategory" scope="col">Przyjęcie weselne</td>
-                            <td data-label="Przyjęcie weselne">0 zł</td>
-                        </tr>
-
+                    
+                    {% endfor %}
                     </tbody>
                 </table>
+                <!--
                 <button class="mt-3 mb-3 btn" data-bs-toggle="modal" data-bs-target="#addNewCategory">Dodaj nową
-                    kategorię</button>
+                    kategorię</button> -->
             </div>
 
             <div class="col-12 col-md-7">
