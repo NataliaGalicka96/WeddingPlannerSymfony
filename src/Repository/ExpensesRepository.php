@@ -39,6 +39,21 @@ class ExpensesRepository extends ServiceEntityRepository
         }
     }
 
+    public function getExpensesAssignedToUser($userId)
+    {
+        
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM expenses
+        WHERE user_id = :user_id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+
+
+        return $resultSet->fetchAllAssociative();
+
+    }
+
 //    /**
 //     * @return Expenses[] Returns an array of Expenses objects
 //     */

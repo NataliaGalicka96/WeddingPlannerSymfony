@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\BudgetCategory;
+use App\Entity\Expenses;
 
 class BudgetController extends AbstractController
 {
@@ -29,10 +30,11 @@ class BudgetController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         
         $categoryBudget = $em->getRepository(BudgetCategory::class)->getCategoryOfBudget();
-    
+        $expenses = $em->getRepository(Expenses::class)->getExpensesAssignedToUser($userId);
 
         return $this->render('budget/index.html.twig', [
             'budgetCategory' => $categoryBudget,
+            'expenses' => $expenses
         ]);
     }
 }

@@ -60,7 +60,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
   
 
 
-    public function copy_default_expense()
+    public function copy_default_expenses()
     {
         $conn = $this->getEntityManager()->getConnection();
 

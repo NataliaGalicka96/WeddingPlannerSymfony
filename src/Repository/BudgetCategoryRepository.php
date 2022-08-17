@@ -51,6 +51,8 @@ class BudgetCategoryRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+
+
 //    /**
 //     * @return BudgetCategory[] Returns an array of BudgetCategory objects
 //     */
