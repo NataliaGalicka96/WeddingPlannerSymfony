@@ -58,13 +58,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
 
   
-    public function copy_default_podcategory_task()
+
+
+    public function copy_default_expenses()
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql='INSERT INTO check_list_assigned_to_user (user_id, name, category_id) 
-        SELECT user.id, check_list_podcategory.name, check_list_podcategory.category_id 
-        FROM user, check_list_podcategory 
+        $sql='INSERT INTO expenses (user_id, category_name, expense) 
+        SELECT user.id, default_expenses.category_name, default_expenses.name
+        FROM user, default_expenses 
         WHERE user.id = (SELECT max(id) FROM user)';
 
         $stmt = $conn->prepare($sql);
@@ -74,39 +76,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         
     }
 
-    /*
-    public function copy_default_category_task()
-    {
-        $conn = $this->getEntityManager()->getConnection();
 
-        $sql='INSERT INTO check_category_assigned_to_user (user_id, name)
-        SELECT user.id, check_list_category.name
-        FROM user, check_list_category
-        WHERE user.id = (SELECT max(id) FROM user)';
-
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-
-        return $resultSet->fetchAllAssociative();
-
-    }
-
-    public function copy_default_task()
-    {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql='INSERT INTO check_category_assigned_to_user (user_id, name)
-        SELECT user.id, check_list_category.name
-        FROM user, check_list_category
-        WHERE user.id = (SELECT max(id) FROM user)';
-
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-
-        return $resultSet->fetchAllAssociative();
-
-    }
-    */
 
     public function copy_default_task()
     {
