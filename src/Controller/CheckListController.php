@@ -44,7 +44,6 @@ class CheckListController extends AbstractController
 
         return $this->render('check_list/index.html.twig', [
             'idOfCategory' => $idOfCategory,
-          // 'podcategoryName' => $podcategoryName,
             'taskAssignedToUser' => $taskAssignedToUser
      
         ]);
@@ -98,6 +97,7 @@ class CheckListController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('app_check_list');
     }
+
 
 
 }

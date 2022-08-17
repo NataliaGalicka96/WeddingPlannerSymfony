@@ -18,9 +18,6 @@ class CheckListCategory
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: CheckListPodcategory::class)]
-    private Collection $checkListPodcategories;
-
 
 
     public function __construct()
@@ -46,35 +43,7 @@ class CheckListCategory
         return $this;
     }
 
-    /**
-     * @return Collection<int, CheckListPodcategory>
-     */
-    public function getCheckListPodcategories(): Collection
-    {
-        return $this->checkListPodcategories;
-    }
-
-    public function addCheckListPodcategory(CheckListPodcategory $checkListPodcategory): self
-    {
-        if (!$this->checkListPodcategories->contains($checkListPodcategory)) {
-            $this->checkListPodcategories->add($checkListPodcategory);
-            $checkListPodcategory->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCheckListPodcategory(CheckListPodcategory $checkListPodcategory): self
-    {
-        if ($this->checkListPodcategories->removeElement($checkListPodcategory)) {
-            // set the owning side to null (unless already changed)
-            if ($checkListPodcategory->getCategory() === $this) {
-                $checkListPodcategory->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     
 }

@@ -43,11 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Contact::class)]
     private Collection $contact;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: CheckListAssignedToUser::class)]
-    private Collection $checkListAssignedToUsers;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: CheckCategoryAssignedToUser::class)]
-    private Collection $checkCategoryAssignedToUsers;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: CheckList::class)]
     private Collection $checkLists;
@@ -57,8 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->guests = new ArrayCollection();
         $this->contact = new ArrayCollection();
-        $this->checkListAssignedToUsers = new ArrayCollection();
-        $this->checkCategoryAssignedToUsers = new ArrayCollection();
+
         $this->checkLists = new ArrayCollection();
     }
 
@@ -230,65 +225,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, CheckListAssignedToUser>
-     */
-    public function getCheckListAssignedToUsers(): Collection
-    {
-        return $this->checkListAssignedToUsers;
-    }
-
-    public function addCheckListAssignedToUser(CheckListAssignedToUser $checkListAssignedToUser): self
-    {
-        if (!$this->checkListAssignedToUsers->contains($checkListAssignedToUser)) {
-            $this->checkListAssignedToUsers->add($checkListAssignedToUser);
-            $checkListAssignedToUser->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCheckListAssignedToUser(CheckListAssignedToUser $checkListAssignedToUser): self
-    {
-        if ($this->checkListAssignedToUsers->removeElement($checkListAssignedToUser)) {
-            // set the owning side to null (unless already changed)
-            if ($checkListAssignedToUser->getUser() === $this) {
-                $checkListAssignedToUser->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, CheckCategoryAssignedToUser>
-     */
-    public function getCheckCategoryAssignedToUsers(): Collection
-    {
-        return $this->checkCategoryAssignedToUsers;
-    }
-
-    public function addCheckCategoryAssignedToUser(CheckCategoryAssignedToUser $checkCategoryAssignedToUser): self
-    {
-        if (!$this->checkCategoryAssignedToUsers->contains($checkCategoryAssignedToUser)) {
-            $this->checkCategoryAssignedToUsers->add($checkCategoryAssignedToUser);
-            $checkCategoryAssignedToUser->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCheckCategoryAssignedToUser(CheckCategoryAssignedToUser $checkCategoryAssignedToUser): self
-    {
-        if ($this->checkCategoryAssignedToUsers->removeElement($checkCategoryAssignedToUser)) {
-            // set the owning side to null (unless already changed)
-            if ($checkCategoryAssignedToUser->getUser() === $this) {
-                $checkCategoryAssignedToUser->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, CheckList>
