@@ -12,6 +12,8 @@ use App\Entity\User;
 
 use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Component\HttpClient\HttpClient;
+
 
 
 
@@ -39,8 +41,6 @@ class CheckListController extends AbstractController
         $idOfCategory = $em->getRepository(CheckListCategory::class)->getNameAndIdOfCategory();
 
         $taskAssignedToUser= $em->getRepository(CheckList::class)->getTaskAssignedToUser($userId);
-
-    
 
         return $this->render('check_list/index.html.twig', [
             'idOfCategory' => $idOfCategory,
