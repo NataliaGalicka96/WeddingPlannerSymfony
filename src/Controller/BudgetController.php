@@ -39,10 +39,6 @@ class BudgetController extends AbstractController
 
 
 
-
-
-
-
         return $this->render('budget/index.html.twig', [
             'budgetCategory' => $categoryBudget,
             'expenses' => $expenses,
@@ -74,6 +70,32 @@ class BudgetController extends AbstractController
         $entityManager->persist($setBudget);
         $entityManager->flush();
 
+
+        return $this->redirectToRoute('app_budget');
+    }
+
+
+    #[Route('/budget/addNewExpense', name: 'add_new_expense', methods: 'POST')]
+    public function addNewExpense(Request $request)
+    {
+
+        $category = trim($request->request->get('category'));
+        $expenseName = trim($request->request->get('expenseName'));
+        $price = trim($request->request->get('price'));
+        $alreadyPaid = trim($request->request->get('alreadyPaid'));
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $expense = new Expenses();
+
+        $expense->setCategoryName($category);
+        $expense->setExpense($expenseName);
+        $expense->setPrice($price);
+        $expense->setAlreadyPaid($alreadyPaid); 
+        $expense->setUser($this->getUser()); 
+
+        $entityManager->persist($expense);
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_budget');
     }

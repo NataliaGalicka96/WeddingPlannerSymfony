@@ -187,7 +187,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="{{ path("add_new_expense") }}" method="POST">
                         <div class="mb-3">
                             <select class="form-control" name="category" id="floatingInput"
                                     required>
@@ -198,25 +198,26 @@
                             </select>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="...">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="..." name="expenseName">
                             <label for="floatingInput">Nowy wydatek</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="number" step="0.01" min="0" class="form-control" id="floatingInput"
+                            <input type="number" step="0.01" min="0" class="form-control" id="floatingInput" name="price"
                                 placeholder="...">
                             <label for="floatingInput">Cena</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="number" step="0.01" min="0" class="form-control" id="floatingInput"
+                            <input type="number" step="0.01" min="0" class="form-control" id="floatingInput" name="alreadyPaid"
                                 placeholder="...">
                             <label for="floatingInput">Zapłacono</label>
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class=" btn btn-success" id="accept">Save changes</button>
+                    <button type="submit" class=" btn btn-success" id="accept">Save changes</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
