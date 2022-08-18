@@ -95,7 +95,7 @@
         {% endif %}
 
 
-
+{#
         <div class="row justify-content-around mt-3">
             <div class="col-12 col-md-5">
                 <table id="allExpenses">
@@ -114,13 +114,65 @@
                 <button class="mt-3 mb-3 btn" data-bs-toggle="modal" data-bs-target="#addNewCategory">Dodaj nową
                     kategorię</button> -->
             </div>
+<div class="col-12 col-md-7">
+            #}
 
-            <div class="col-12 col-md-7">
+
+
+
+            
                 <div class="podcategory">
-                    <div class="title">
-                        <h1>Ceremonia</h1>
-                    </div>
 
+                    <h1>Szczegóły wydatków</h1>
+                    
+                    <div class="wrapper">
+                            <form>
+                             {% for paid in alreadyPaid %}
+                                <div class="dropdown mb-4 mt-1">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        {{paid["category_name"]}}
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        {% for detail in details %}
+                            <table id="detail">
+                                <thead>
+                                    <tr>
+                                        <td scope="col">Wydatek</td>
+                                        <td scope="col">Cena</td>
+                                        <td scope="col">Zapłacono</td>
+                                        <td scope="col">Pozostało</td>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                            {% if paid["category_name"] == detail['category_name'] %}
+                                            
+                                                <tr>
+                                                    <td data-label="Wydatek">{{detail['expense']}}</td>
+                                                    <td data-label="Cena">{{detail['price']}}</td>
+                                                    <td data-label="Zapłacono">{{detail['already_paid']}}</td>
+                                                    <td data-label="Pozostało">asynchronicznie</td>
+                                                </tr>
+                                            
+                                            
+                                            {% endif %}
+                                            
+                                            {% endfor %}
+                                </tbody>
+                        </table>
+                                    </ul>
+                                </div>
+                                {% endfor %}
+                                <div id="addNewTask" class="mt-5">
+                                            <button class="btn" type="button" id="buttonToAddNewTask" data-bs-toggle="modal"
+                                                data-bs-target="#addNewTaskModal">Dodaj zadanie</button>
+                                    </div>
+                            </form>
+                        </div>
+                        
+                    
+{#
                     <form action="#" method="post">
 
                         
@@ -153,6 +205,7 @@
                 </div>
             </div>
         </div>
+        #}
     </div>
 
 
