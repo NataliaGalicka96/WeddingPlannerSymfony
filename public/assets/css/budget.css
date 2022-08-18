@@ -3,6 +3,10 @@ body {
 }
 
 
+.wrapper {
+    margin-bottom: 200px;
+}
+
 
 h1 {
     text-align: center;
@@ -60,6 +64,27 @@ h1 {
     margin: 10px 0 10px 0;
 }
 
+
+
+.wrapper ul {
+    position: inherit !important;
+    transform: translate3d(0px, 10px, 0px) !important;
+    box-shadow: 10px 5px 5px rgb(173, 165, 165);
+    transition: all 0.5s ease-out;
+    margin-bottom: 200px;
+}
+
+.dropdown {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-content: space-around;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 .container {
     width: 100%;
     margin-left: auto;
@@ -68,29 +93,22 @@ h1 {
     margin-bottom: 50px;
 }
 
-thead tr {
+#summary thead tr {
     border-bottom: 2px solid #ddd;
 }
 
-tr {
+#summary tr {
     border-bottom: 1px solid #ddd;
-}
-
-table {
-    border-collapse: collapse;
 }
 
 td {
     vertical-align: middle;
 }
 
+
+
 table {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    margin: 0;
-    padding: 0;
     width: 100%;
-    table-layout: fixed;
 }
 
 table caption {
@@ -98,11 +116,7 @@ table caption {
     margin: .5em 0 .75em;
 }
 
-table tr {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    padding: .35em;
-}
+
 
 table th,
 table td {
@@ -124,7 +138,12 @@ thead tr td,
 #allExpenses,
 #summary,
 #detail {
-
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
     box-shadow: 10px 5px 5px rgb(173, 165, 165);
     transition: all 0.5s ease-out;
 
@@ -144,7 +163,11 @@ thead tr td,
     font-size: 18px;
     padding-left: 20px;
     padding-right: 20px;
+    width: 75%;
+}
 
+#buttonToAddNewExpense {
+    width: 30% !important;
 }
 
 .btn:hover,
@@ -194,6 +217,9 @@ thead tr td,
     box-shadow: inset 0px 0px 2px 2px #ef97aa;
 }
 
+
+
+
 @media screen and (max-width: 800px) {
 
     #budget {
@@ -201,7 +227,7 @@ thead tr td,
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
 
     .container {
         width: 90%;
@@ -250,13 +276,13 @@ thead tr td,
     }
 
     table tr {
-        border-bottom: 3px solid #ddd;
+        /*border-bottom: 3px solid #ddd;*/
         display: block;
         margin-bottom: .625em;
     }
 
     table td {
-        border-bottom: 1px solid #ddd;
+        /* border-bottom: 1px solid #ddd;*/
         display: block;
         font-size: .8em;
         text-align: right;
@@ -265,8 +291,8 @@ thead tr td,
     table td::before {
         /*
       * aria-label has no advantage, it won't be read inside a table
-      content: attr(aria-label);
-      */
+        content: attr(aria-label);*/
+
         content: attr(data-label);
         float: left;
         font-weight: bold;
