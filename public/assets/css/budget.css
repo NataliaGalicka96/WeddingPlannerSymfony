@@ -186,13 +186,17 @@ thead tr td,
     margin-bottom: 30px;
 }
 
-#amount {
+#amount,
+#price,
+#alreadySpend {
 
     transition: all 0.3s ease;
 }
 
 
-#amount:focus {
+#amount:focus,
+#price:focus,
+#alreadySpend:focus {
 
     box-shadow: inset 0px 0px 2px 2px #ef97aa;
 }

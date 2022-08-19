@@ -1,36 +1,39 @@
+let tdBudget = document.querySelector('td#Budget');
+let tdAlreadyPaid = document.querySelector('td#paid');
+let tdToSpend = document.querySelector('td#toSpend');
+
 
 let budget = (parseFloat(document.querySelector('td#Budget').innerHTML)).toFixed(2);
 let alreadyPaid = (parseFloat(document.querySelector('td#paid').innerHTML)).toFixed(2);
-let toPay = document.querySelector('td#toSpend');
+
 
 let difference = (budget - alreadyPaid).toFixed(2);
 
-toPay.innerHTML = difference + " zł";
+let spend = tdToSpend.innerHTML = difference;
+
+let newBudget = budget.replace('.', ',');
+let newPaid = alreadyPaid.replace('.', ',');
+let newToSpend = spend.replace('.', ',');
+
+
+tdBudget.innerHTML = newBudget + " zł";
+tdAlreadyPaid.innerHTML = newPaid + " zł";
+tdToSpend.innerHTML = newToSpend + " zł";
 
 
 
-let tdPrice = document.querySelectorAll('td[data-label="Cena"]');
+let tdleftToPay = document.querySelectorAll('td#leftToPay');
 
+let inputPrice = document.querySelectorAll('input#price');
+let inputSpend = document.querySelectorAll('input#alreadySpend');
 
-for (let i = 0; i < tdPrice.length; i++) {
-    tdPrice[i].addEventListener("mouseover", e => {
-        let input = document.createElement('input')
-        input.classList.add("form-control");
-        input.type = "submit";
+for (let i = 0; i < tdleftToPay.length; i++) {
+    let difference = (parseFloat(inputPrice[i].value) - (parseFloat(inputSpend[i].value))).toFixed(2);
+    console.log(difference);
 
-        tdPrice.appendChild(input);
+    tdleftToPay[i].innerHTML = difference.replace('.', ',');
+    // let differenceWithComma = difference.replace('.', ',');
 
-        console.log("mouseover");
-    });
+    // tdleftToPay[i].innerHTML = differenceWithComma + " zł";
 }
 
-/*
-element.addEventListener('mouseover', function () { this.innerHTML = 'Zaszło zdarzenie MouseOver'; })
-element.addEventListener('mousemove', function () { this.style.background = 'green'; })
-element.addEventListener('mouseout', function () { this.style.background = 'blue'; this.innerHTML = 'Kliknij tu'; })
-</script >
-
-<input type="number" step="0.01" min="0" class="form-control" id="floatingInput" name="price"
-                                placeholder="...">
-
-*/
