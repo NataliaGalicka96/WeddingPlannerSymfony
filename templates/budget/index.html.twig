@@ -6,7 +6,12 @@
    <link rel="stylesheet" href="{{ asset('assets/css/budget.css') }}">
 {% endblock %}
 
+{% block javascripts %}
+
+{% endblock %}
+
 {% block body %}
+
 <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -81,10 +86,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td data-label="Budżet">{{ price['budget']}}</td>
+                            <td data-label="Budżet" id="Budget">{{ price['budget']}} zł</td>
                             {% for sum in sumOfAlreadyPaid %}
-                            <td data-label="Zapłacono">{{ sum['SUM'] }}</td>
-                            <td data-label="Pozostało">Tu asynchronicznie chce</td>
+                            <td data-label="Zapłacono" id="paid">{{ sum['SUM'] }} zł</td>
+                            <td data-label="Pozostało" id="toSpend"></td>
                             {% endfor %}
                         </tr>
                     </tbody>
@@ -221,4 +226,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block js %}
+    <script src="{{ asset('assets/js/budget.js') }}"></script>
+
 {% endblock %}
