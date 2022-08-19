@@ -43,6 +43,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Contact::class)]
     private Collection $contact;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Budget::class)]
+    private Collection $budget;
 
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: CheckList::class)]
@@ -59,6 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         $this->checkLists = new ArrayCollection();
         $this->expenses = new ArrayCollection();
+        $this->budget = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -291,5 +294,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
+    /**
+     * @return Collection<int, Budget>
+     */
+    public function getBudget(): Collection
+    {
+        return $this->budget;
+    }
+
+    public function addBudget(Budget $budget): self
+    {
+        if (!$this->budget->contains($budget)) {
+            $this->budget->add($budget);
+            $budget->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBudget(Budget $budget): self
+    {
+        if ($this->budget->removeElement($budget)) {
+            // set the owning side to null (unless already changed)
+            if ($budget->getUser() === $this) {
+                $budget->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 
 }
