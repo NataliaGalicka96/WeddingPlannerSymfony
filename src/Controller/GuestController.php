@@ -30,7 +30,6 @@ class GuestController extends AbstractController
         $guests = $em->getRepository(Guest::class)->getGuestAssignedToUser($userId);
         $summary = $em->getRepository(Guest::class)->getSummaryOfGuest($userId);
 
-        var_dump($summary);
 
         $form = $this->createForm(GuestType::class);
         

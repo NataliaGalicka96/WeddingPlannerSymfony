@@ -126,8 +126,10 @@
                                                 
                                                     <tr>
                                                         <td data-label="Wydatek">{{detail['expense']}}</td>
-                                                        <td data-label="Cena">{{detail['price']}}</td>
-                                                        <td data-label="Zapłacono">{{detail['already_paid']}}</td>
+                                                        <td data-label="Cena"><input id="amount" class="form-control" type="number" step="0.01" min="0"
+                    aria-label="default input example" style="border: none; text-align:center;" value="{{detail['price']}}"></td>
+                                                        <td data-label="Zapłacono"><input id="amount" class="form-control" type="number" step="0.01" min="0"
+                    aria-label="default input example" style="border: none; text-align:center;" value="{{detail['already_paid']}}"></td>
                                                         <td data-label="Pozostało">asynchronicznie</td>
                                                     </tr>
                                                 
