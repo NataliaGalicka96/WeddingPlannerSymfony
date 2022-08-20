@@ -39,6 +39,21 @@ class NoteRepository extends ServiceEntityRepository
         }
     }
 
+    public function getNoteAssignedToUser($userId)
+    {
+        
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM note
+        WHERE user_id = :user_id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+
+
+        return $resultSet->fetchAllAssociative();
+
+    }
+
 //    /**
 //     * @return Note[] Returns an array of Note objects
 //     */
