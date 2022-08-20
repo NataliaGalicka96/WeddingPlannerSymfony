@@ -122,15 +122,23 @@
 
                                     </thead>
                                     <tbody>
+                                    
                                     {% for detail in details %}
                                         {% if paid["category_name"] == detail['category_name'] %}
                                                 
                                             <tr>
                                                 <td data-label="Wydatek">{{detail['expense']}}</td>
+
+                                                <form action="{{ path("update_price",{'id':detail["id"]}) }}" method="POST">
                                                 <td data-label="Cena"><input id="price" class="form-control" type="number" step="0.01" min="0"
-                                                aria-label="default input example" style="border: none; text-align:center;" value="{{detail['price']}}"></td>
+                                                aria-label="default input example" style="border: none; text-align:center;" value="{{detail['price']}}" name="priceOfPodcategory"></td>
+                                                </form>
+
+                                                <form action="{{ path("update_alreadypay",{'id':detail["id"]}) }}" method="POST">
                                                 <td data-label="Zapłacono"><input id="alreadySpend" class="form-control" type="number" step="0.01" min="0"
-                                                aria-label="default input example" style="border: none; text-align:center;" value="{{detail['already_paid']}}"></td>
+                                                aria-label="default input example" style="border: none; text-align:center;" value="{{detail['already_paid']}}" name="alreadyPayOfPodcategory"></td>
+                                                </form>
+
                                                 <td data-label="Pozostało" id="leftToPay"></td>
                                             </tr>
                                                 
@@ -138,6 +146,7 @@
                                         {% endif %}
                                                 
                                     {% endfor %}
+                                    <form>
                                     </tbody>
                                 </table>
                                 </div>

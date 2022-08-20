@@ -56,8 +56,6 @@ class BudgetController extends AbstractController
         $budgetFromForm = trim($request->request->get('budget'));
         $budget = (float)number_format((float)$budgetFromForm, 2, '.', '');
 
-        var_dump($budget);
-
         $entityManager = $this->getDoctrine()->getManager();
 
         $setBudget = new Budget();
@@ -99,7 +97,61 @@ class BudgetController extends AbstractController
 
         return $this->redirectToRoute('app_budget');
     }
+
+    #[Route('/budget/update/price/{id}', name: 'update_price', methods: "POST")]
+    public function updatePrice(Request $request, $id)
+    {
+
+        $newPrice = trim($request->request->get('priceOfPodcategory'));
+        //$price = (float)number_format((float)$newPrice, 2, '.', '');
+
+         /** 
+         * @var User $user 
+         * */
+        
+        $user = $this->getUser();
+        if(!empty($user)){
+        $userId = $user->getId();
+        }
+        
+
+        $entityManager = $this->getDoctrine()->getManager();
+        
+        $expense = $entityManager->getRepository(Expenses::class)->updatePrice($userId, $id, $newPrice);
+
+        var_dump($expense);
+
+
+        return $this->redirectToRoute('app_budget');
+    }
+
+    #[Route('/budget/update/alreadyPaid/{id}', name: 'update_alreadypay', methods: "POST")]
+    public function updatealreadyPaid(Request $request, $id)
+    {
+
+        $newPrice = trim($request->request->get('alreadyPayOfPodcategory'));
+        //$price = (float)number_format((float)$newPrice, 2, '.', '');
+
+         /** 
+         * @var User $user 
+         * */
+        
+        $user = $this->getUser();
+        if(!empty($user)){
+        $userId = $user->getId();
+        }
+        
+
+        $entityManager = $this->getDoctrine()->getManager();
+        
+        $expense = $entityManager->getRepository(Expenses::class)->updateAlreadyPaid($userId, $id, $newPrice);
+
+
+
+        return $this->redirectToRoute('app_budget');
+    }
 }
+
 /*
     if(empty($title))
         return $this->redirectToRoute('app_check_list');
