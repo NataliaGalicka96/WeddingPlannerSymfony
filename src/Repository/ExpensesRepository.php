@@ -98,6 +98,42 @@ class ExpensesRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+    public function updatePrice($userId, $id, $price)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql="UPDATE expenses
+        SET price = :price
+        WHERE user_id = :user_id AND id =:id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId,
+                                        'price' => $price,
+                                        'id' => $id
+                                        ]);
+
+
+        return $resultSet->fetchAllAssociative(); 
+    }
+
+    public function updateAlreadyPaid($userId, $id, $paid)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql="UPDATE expenses
+        SET already_paid = :paid
+        WHERE user_id = :user_id AND id =:id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId,
+                                        'paid' => $paid,
+                                        'id' => $id
+                                        ]);
+
+
+        return $resultSet->fetchAllAssociative(); 
+    }
+
 //    /**
 //     * @return Expenses[] Returns an array of Expenses objects
 //     */
