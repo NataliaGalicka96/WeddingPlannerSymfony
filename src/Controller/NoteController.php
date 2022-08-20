@@ -29,6 +29,8 @@ class NoteController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $noteAssignedToUser= $em->getRepository(Note::class)->getNoteAssignedToUser($userId);
+
+        var_dump($noteAssignedToUser);
         
         return $this->render('note/index.html.twig', [
             'notes' =>  $noteAssignedToUser
@@ -106,6 +108,16 @@ class NoteController extends AbstractController
         
         $expense = $entityManager->getRepository(Note::class)->updateNote($userId, $id, $newNote);
 
+        return $this->redirectToRoute('app_note');
+    }
+
+    #[Route('note/delete/{id}', name: 'note_delete')]
+ 
+    public function delete(Note $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($id);
+        $entityManager->flush();
         return $this->redirectToRoute('app_note');
     }
 
