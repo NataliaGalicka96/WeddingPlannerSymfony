@@ -60,7 +60,9 @@ class RegistrationController extends AbstractController
             $em->getRepository(User::class)->copy_default_expenses();
 
 
-            $this->addFlash('success', "Rejestracja powiodła się!");
+            $this->addFlash('success', "Rejestracja powiodła się! Możesz się zalogować");
+
+            return $this->redirectToRoute('app_login');
 
 
         
@@ -84,7 +86,7 @@ class RegistrationController extends AbstractController
             */
 
         }else{
-            $this->addFlash('error', "Nie udało się zarejestrować konta!");
+            //$this->addFlash('error', "Nie udało się zarejestrować konta!");
         }
 
         return $this->render('registration/register.html.twig', [
