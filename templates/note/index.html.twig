@@ -64,16 +64,17 @@
             {% for note in notes %}
                 <li>
                     <a>
+                    <form action="{{ path("update_title",{'id':note["id"]}) }}" method="POST">
                         <input type="text" id="title" name="title" value={{ note['title']}}>
-                        <textarea id="note" name="note" >{{ note['note'] }}</textarea>
+                    </form>
+                    <form action="{{ path("update_note",{'id':note["id"]}) }}" method="POST">
+                        <input type="text" id="note" name="note" value={{ note['note'] }}>
+                    </form>
                     </a>
                 </li>
             {% endfor %}
                 
-
-
             </ul>
-
 
         </div>
 
@@ -88,14 +89,18 @@
                     
                     <div class="modal-body">
                    <form action="{{ path("create_new_note") }}" method="POST">
+
+                        
                         <div class="form-floating mb-3">
                             <input name = "title" type="text" class="form-control" id="floatingInput" placeholder="..." >
                             <label for="floatingInput">Tytuł notatki</label>
                         </div>
+                        
                         <div class="form-floating mb-3">
                             <input name = "content" type="text" class="form-control" id="floatingInput" placeholder="...">
                             <label for="floatingInput">Nowe zadanie</label>
                         </div>
+                        
 
                     </div>
                     <div class="modal-footer">

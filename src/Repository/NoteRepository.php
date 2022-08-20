@@ -54,6 +54,42 @@ class NoteRepository extends ServiceEntityRepository
 
     }
 
+    public function updateTitle($userId, $id, $title)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql="UPDATE note
+        SET title = :title
+        WHERE user_id = :user_id AND id =:id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId,
+                                        'title' => $title,
+                                        'id' => $id
+                                        ]);
+
+
+        return $resultSet->fetchAllAssociative(); 
+    }
+
+    public function updateNote($userId, $id, $note)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql="UPDATE note
+        SET note = :note
+        WHERE user_id = :user_id AND id =:id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId,
+                                        'note' => $note,
+                                        'id' => $id
+                                        ]);
+
+
+        return $resultSet->fetchAllAssociative(); 
+    }
+
 //    /**
 //     * @return Note[] Returns an array of Note objects
 //     */
