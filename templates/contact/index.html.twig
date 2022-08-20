@@ -83,7 +83,8 @@
                         <td data-label="Imię i nazwisko">{{ contact["name"] }}</td>
                         <td data-label="Adres">ul. {{ contact["street"] }} {{ contact['home_number'] }}, {{ contact['postalcode'] }} {{ contact["city"] }}</td>
                         <td data-label="E-mail">{{ contact["email"] }}</td>
-                        <td data-label="Telefon">{{ contact["phone_number"] }}</td>
+                        <td data-label="Telefon">{{ contact["phone_number"] }} </td>
+                        <td><a onclick="return confirm('Czy na pewno chcesz usunąć to zadanie?')" href="{{path('contact_delete',{'id': contact.id})}}"><span class="input-group-text" id="delete"><i class="fa-solid fa-trash-can"></i></span></a>  </td>
 
                     </tr>
                     {% endfor %}

@@ -185,6 +185,9 @@ table th {
     text-transform: uppercase;
 }
 
+.input-group-text {
+    display: contents !important;
+}
 
 #contact {
 
