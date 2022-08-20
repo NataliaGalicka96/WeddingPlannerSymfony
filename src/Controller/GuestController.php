@@ -28,6 +28,8 @@ class GuestController extends AbstractController
         }
         $em = $this->getDoctrine()->getManager();
         $guests = $em->getRepository(Guest::class)->getGuestAssignedToUser($userId);
+        $summary = $em->getRepository(Guest::class)->getSummaryOfGuest($userId);
+
 
         $form = $this->createForm(GuestType::class);
         
@@ -64,6 +66,7 @@ class GuestController extends AbstractController
         return $this->render('guest/index.html.twig', [
             'guestform' => $form->createView(),
             'guests' => $guests,
+            'summary' => $summary
         ]);
     }
 

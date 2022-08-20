@@ -51,6 +51,29 @@ class GuestRepository extends ServiceEntityRepository
 
         return $resultSet->fetchAllAssociative();
     }
+
+
+    public function getSummaryOfGuest($userId)
+    {
+
+        $conn= $this->getEntityManager()->getConnection();
+        $sql = "SELECT COUNT(name) AS numberOfGuest, 
+        (SELECT COUNT(is_confirmed) FROM guest WHERE  user_id = :user_id and is_confirmed = 1) as confirmed,
+        (SELECT COUNT(is_accommodation) FROM guest WHERE  user_id = :user_id and is_accommodation = 1) as accommodation,
+        (SELECT COUNT(transport) FROM guest WHERE  user_id = :user_id and transport = 1) as transport,
+        (SELECT COUNT(is_adult) FROM guest WHERE  user_id = :user_id and is_adult = 1) as adult,
+        (SELECT COUNT(is_child_under_3_years) FROM guest WHERE  user_id = :user_id and is_child_under_3_years = 1) as childUnderThree,
+        (SELECT COUNT(is_child_between_3_12_years) FROM guest WHERE  user_id = :user_id and is_child_between_3_12_years = 1) as childOverThree,
+        (SELECT COUNT(special_diet) FROM guest WHERE  user_id = :user_id and special_diet = 1) as Diet
+        FROM guest
+        WHERE user_id = :user_id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+
+
+        return $resultSet->fetchAllAssociative();
+    }
 //    /**
 //     * @return Guest[] Returns an array of Guest objects
 //     */

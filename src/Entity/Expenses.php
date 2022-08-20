@@ -23,10 +23,12 @@ class Expenses
     #[ORM\Column(length: 255)]
     private ?string $expense = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: false,
+    options: ["default" => 0.00])]
     private ?string $Price = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: false,
+    options: ["default" => 0.00])]
     private ?string $already_paid = null;
 
     public function getId(): ?int

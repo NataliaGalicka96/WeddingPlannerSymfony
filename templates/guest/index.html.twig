@@ -116,15 +116,16 @@
             </thead>
             <tbody>
                 <tr>
-                    <td data-label="Łączna liczba gości">125</td>
-                    <td data-label="Liczba dorosłych">100
+                {% for finalList in summary %}
+                    <td data-label="Łączna liczba gości">{{ finalList['confirmed'] }}</td>
+                    <td data-label="Liczba dorosłych">{{ finalList['adult'] }}
                     </td>
-                    <td data-label="Liczba dzieci 3-12 lat">10</td>
-                    <td data-label="Liczba dzieci &lt; 3 lata">15</td>
-                    <td data-label="Liczba potrzebnych noclegów">17 </td>
-                    <td data-label="Liczba osób potrzebujących transport">5</td>
-                    <td data-label="Specjalna dieta">3</td>
-
+                    <td data-label="Liczba dzieci 3-12 lat">{{ finalList['childOverThree'] }}</td>
+                    <td data-label="Liczba dzieci &lt; 3 lata">{{ finalList['childUnderThree'] }}</td>
+                    <td data-label="Liczba potrzebnych noclegów">{{ finalList['accommodation'] }}</td>
+                    <td data-label="Liczba osób potrzebujących transport">{{ finalList['transport'] }}</td>
+                    <td data-label="Specjalna dieta">{{ finalList['Diet'] }}</td>
+                {% endfor %}
                 </tr>
         </table>
     </div>
