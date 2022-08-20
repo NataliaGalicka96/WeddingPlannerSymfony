@@ -52,7 +52,8 @@
 
         <div class="row">
             <div class="col-10">
-                <a class="btn" id="add_new" href="#" role="button">
+                <a class="btn" id="add_new" href="#" role="button" data-bs-toggle="modal"
+                    data-bs-target="#addNewNote">
                     Dodaj notatkę
                 </a>
             </div>
@@ -60,33 +61,60 @@
 
         <div class="container">
             <ul>
+            {% for note in notes %}
                 <li>
-                    <a href="#">
-                        <input type="text" id="title" name="title" placeholder="Tytuł">
-                        <textarea id="note" name="note" placeholder="Treść notatki"></textarea>
+                    <a>
+                    <a onclick="return confirm('Czy na pewno chcesz usunąć notatkę?')" href="{{path('note_delete',{'id':note.id})}}"><i class="fa-solid fa-xmark"></i></a>
+                    
+                    <form action="{{ path("update_title",{'id':note["id"]}) }}" method="POST">
+                        <input type="text" id="title" name="title" value={{ note['title']}}>
+                    </form>
+                    <form action="{{ path("update_note",{'id':note["id"]}) }}" method="POST">
+                        <input type="text" id="note" name="note" value={{ note['note'] }}>
+                    </form>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <input type="text" id="title" name="title" placeholder="Tytuł">
-                        <textarea id="note" name="note" placeholder="Treść notatki"></textarea>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <input type="text" id="title" name="title" placeholder="Tytuł">
-                        <textarea id="note" name="note" placeholder="Treść notatki"></textarea>
-                    </a>
-                </li>
-                <li class="addSticky" id="board">
-                </li>
-
+            {% endfor %}
+                
             </ul>
-
 
         </div>
 
+            <!-- Modal -->
+        <div class="modal fade" id="addNewNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Dodaj nową notatkę</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                   <form action="{{ path("create_new_note") }}" method="POST">
 
+                        
+                        <div class="form-floating mb-3">
+                            <input name = "title" type="text" class="form-control" id="floatingInput" placeholder="..." >
+                            <label for="floatingInput">Tytuł notatki</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input name = "content" type="text" class="form-control" id="floatingInput" placeholder="...">
+                            <label for="floatingInput">Nowe zadanie</label>
+                        </div>
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class=" btn btn-success" id="accept">Save changes</button>
+                    </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+<!--
         <script>
 
             var noteTemp = '<a class="note" style="overflow: hidden;">'
@@ -143,4 +171,6 @@
 
 
         </script>
+
+-->
 {% endblock %}

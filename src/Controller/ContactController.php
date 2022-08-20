@@ -72,5 +72,16 @@ class ContactController extends AbstractController
         ]);
     }
 
+    
+    #[Route('contact/delete/{id}', name: 'contact_delete')]
+ 
+    public function delete(Contact $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($id);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_contact');
+    }
+
 
 }

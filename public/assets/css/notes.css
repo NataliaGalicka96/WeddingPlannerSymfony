@@ -81,6 +81,7 @@ p {
     font-size: 2rem;
 }
 
+
 .container>ul,
 li {
     list-style: none;
@@ -91,6 +92,8 @@ li {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+/*
 
 .container>ul li a,
 .addSticky>li a {
@@ -105,8 +108,23 @@ li {
     transform: rotate(-6deg);
     transition: transform .15s linear;
 }
+*/
 
 
+
+.fa-solid,
+.fas {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    display: flex;
+    flex-direction: row-reverse;
+
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+
+/*
 .container>ul li a:hover,
 .container>ul li a:focus,
 .note a:hover,
@@ -121,7 +139,7 @@ li {
 .note>ul li {
     margin: 1em;
 }
-
+*/
 
 .btn {
 
