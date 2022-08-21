@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\CheckListRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: CheckListRepository::class)]
 class CheckList
 {
@@ -14,12 +16,19 @@ class CheckList
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    /**
+     * @Assert\NotBlank
+     */
     private ?string $categoryName = null;
 
     #[ORM\Column(length: 255)]
+    /**
+     * @Assert\NotBlank
+     */
     private ?string $Task = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: false,
+    options: ["default" => 0])]
     private ?bool $status = null;
 
     #[ORM\ManyToOne(inversedBy: 'checkLists')]

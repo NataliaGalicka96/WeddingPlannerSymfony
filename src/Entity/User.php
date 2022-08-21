@@ -10,14 +10,20 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
+#[UniqueEntity(fields: ['username'], message: 'Istnieje użytkownik o takiej nazwie.')]
+#[UniqueEntity(fields: ['email'], message: 'Istnieje użytkownik o takim adresie e-mail.')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $username = null;
@@ -27,11 +33,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
+     *
      */
     #[ORM\Column]
     private ?string $password = null;
 
+    
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\Email]
     private ?string $email = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Guest::class)]
@@ -358,5 +367,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    
 
 }
