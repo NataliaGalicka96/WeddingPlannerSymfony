@@ -86,7 +86,7 @@ class RegistrationController extends AbstractController
             */
 
         }else{
-            //$this->addFlash('error', "Nie udało się zarejestrować konta!");
+            $this->addFlash('error', "Nie udało się zarejestrować konta!");
         }
 
         return $this->render('registration/register.html.twig', [

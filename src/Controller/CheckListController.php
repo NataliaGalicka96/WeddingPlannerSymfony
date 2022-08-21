@@ -23,6 +23,7 @@ class CheckListController extends AbstractController
     public function index(): Response
     {
         if(!$this->getUser()){
+            $this->addFlash('error', "Zaloguj się aby mieć dostęp do tej strony!");
             return $this->redirectToRoute('app_index');
         }
 

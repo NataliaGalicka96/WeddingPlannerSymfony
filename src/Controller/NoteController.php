@@ -15,6 +15,7 @@ class NoteController extends AbstractController
     public function index(): Response
     {
         if(!$this->getUser()){
+            $this->addFlash('error', "Zaloguj się aby mieć dostęp do tej strony!");
             return $this->redirectToRoute('app_index');
         }
 
@@ -30,7 +31,7 @@ class NoteController extends AbstractController
 
         $noteAssignedToUser= $em->getRepository(Note::class)->getNoteAssignedToUser($userId);
 
-        var_dump($noteAssignedToUser);
+
         
         return $this->render('note/index.html.twig', [
             'notes' =>  $noteAssignedToUser
