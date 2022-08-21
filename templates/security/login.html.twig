@@ -8,6 +8,7 @@
 
 
 {% block body %}
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -59,7 +60,7 @@
           </div>
         </div>
         -->
-        <div class="button"><button type="submit" class="btn btn-warning">Zaloguj się</button></div>
+        <div class="button"><button type="submit" class="btn">Zaloguj się</button></div>
 
         <div class="signup">Nie masz jeszcze konta? <a href="{{ path('app_register') }}"> Zarejestruj się!</a></div>
 

@@ -80,7 +80,7 @@
                         <tr>
                             <td scope="col">Budżet</td>
                             <td scope="col">Wydano</td>
-                            <td scope="col">Pozostało</td>
+                            <td scope="col">Pozostało do wydania</td>
                         </tr>
 
                     </thead>
@@ -89,7 +89,7 @@
                             <td data-label="Budżet" id="Budget">{{ price['budget']}} zł</td>
                             {% for sum in sumOfAlreadyPaid %}
                             <td data-label="Zapłacono" id="paid">{{ sum['SUM'] }} zł</td>
-                            <td data-label="Pozostało" id="toSpend"></td>
+                            <td data-label="Pozostało do wydania" id="toSpend"></td>
                             {% endfor %}
                         </tr>
                     </tbody>
@@ -117,7 +117,7 @@
                                             <td scope="col">Wydatek</td>
                                             <td scope="col">Cena</td>
                                             <td scope="col">Zapłacono</td>
-                                            <td scope="col">Pozostało</td>
+                                            <td scope="col">Pozostało do zapłaty</td>
                                         </tr>
 
                                     </thead>
@@ -139,7 +139,7 @@
                                                 aria-label="default input example" style="border: none; text-align:center;" value="{{detail['already_paid']}}" name="alreadyPayOfPodcategory"></td>
                                                 </form>
 
-                                                <td data-label="Pozostało" id="leftToPay"></td>
+                                                <td data-label="Pozostało do zapłaty" id="leftToPay"></td>
                                             </tr>
                                                 
                                                 
