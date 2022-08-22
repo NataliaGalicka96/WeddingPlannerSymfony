@@ -11,6 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+
 class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -23,7 +26,21 @@ class ContactType extends AbstractType
                 ],
                 'row_attr' => [
                     'class' => 'form-floating mb-3'
-                ]
+                ],
+                'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Proszę podać nazwę kontaktu.',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Nazwa powinna składać się z przynajmniej {{ limit }} znaków.',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 100,
+                        'maxMessage' => 'Nazwa powinna składać się z maksymalnie {{ limit }} znaków.',
+                    ]),
+                    
+                ],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'E-mail',
@@ -32,7 +49,13 @@ class ContactType extends AbstractType
                 ],
                 'row_attr' => [
                     'class' => 'form-floating mb-3'
-                ]
+                ],
+                'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Proszę podać adres e-mail.',
+                    ]),
+                ],
             ])
             ->add('phoneNumber', IntegerType::class,[
                 'label' => 'Numer telefonu',
@@ -41,7 +64,8 @@ class ContactType extends AbstractType
                 ],
                 'row_attr' => [
                     'class' => 'form-floating mb-3'
-                ]
+                ],
+                'required' => true,
             ])
             ->add('street', TextType::class,[
                 'label' => 'Nazwa ulicy',
@@ -50,7 +74,8 @@ class ContactType extends AbstractType
                 ],
                 'row_attr' => [
                     'class' => 'form-floating mb-3'
-                ]
+                ],
+                'required' => true,
             ])
             ->add('homeNumber', IntegerType::class,[
                 'label' => 'Numer domu',
@@ -60,7 +85,8 @@ class ContactType extends AbstractType
                 'row_attr' => [
                     'class' => 'form-floating mb-3'
                     
-                ]
+                ],
+                'required' => true,
             ])
             ->add('city', TextType::class,[
                 'label' => 'Miasto',
@@ -69,7 +95,8 @@ class ContactType extends AbstractType
                 ],
                 'row_attr' => [
                     'class' => 'form-floating mb-3'
-                ]
+                ],
+                'required' => true,
             ])
             ->add('postalcode', TextType::class,[
                 'label' => 'Kod pocztowy',
@@ -78,7 +105,8 @@ class ContactType extends AbstractType
                 ],
                 'row_attr' => [
                     'class' => 'form-floating mb-3'
-                ]
+                ],
+                'required' => true,
             ])
 
         ;

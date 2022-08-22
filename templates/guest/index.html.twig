@@ -18,6 +18,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_main_page')}}">Strona główna</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ path('app_check_list')}}">Zadania</a>
                     </li>
@@ -64,6 +67,7 @@
                 </a>
             </div>
         </div>
+        {% if guests %}
             <table id="guests">
                 <thead>
                     <tr>
@@ -78,8 +82,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for guest in guests %}
-                    
+                
+                    {% for guest in guests %}
+                        
                     <tr>
                         <td data-label="Imię i nazwisko">{{ guest["name"] }}</td>
                         <td data-label="Potwierdzone"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["is_confirmed"] == 1 %}checked{% endif %}>
@@ -95,7 +100,9 @@
                         <td data-label="Specjalna dieta"><input class="form-check-input mt-1" type="checkbox" value="" {% if guest["special_diet"] == 1 %}checked{% endif %}>
                         </td>
                     </tr>
-                {% endfor %}
+                        
+                    {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
 

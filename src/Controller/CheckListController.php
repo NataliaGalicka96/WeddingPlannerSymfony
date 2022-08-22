@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpClient\HttpClient;
 
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 
 
 
@@ -36,9 +38,9 @@ class CheckListController extends AbstractController
         }
 
         $em = $this->getDoctrine()->getManager();
-/*
+        /*
         $podcategoryName = $em->getRepository(CheckListPodcategory::class)->getNameOfCategory($userId);
-*/        
+        */        
         $idOfCategory = $em->getRepository(CheckListCategory::class)->getNameAndIdOfCategory();
 
         $taskAssignedToUser= $em->getRepository(CheckList::class)->getTaskAssignedToUser($userId);
@@ -51,7 +53,7 @@ class CheckListController extends AbstractController
     }
 
     #[Route('/check/list/create', name: 'create_new_task', methods: 'POST')]
-    public function createNewTask(Request $request)
+    public function createNewTask(Request $request, ValidatorInterface $validator)
     {
 
         $category = trim($request->request->get('category'));
@@ -67,12 +69,19 @@ class CheckListController extends AbstractController
         $task->setCategoryName($category);
         $task->setTask($title);
         $task->setUser($this->getUser());
+        $task->setStatus(0);
 
         $entityManager->persist($task);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_check_list');
+        //$errors = $validator->validate($task);
+
+
+            return $this->redirectToRoute('app_check_list');
     }
+
+    
+    
 
     #[Route('/check/list/switch-status/{id}', name: 'switch_status')]
  
