@@ -36,7 +36,9 @@ h1 {
 }
 
 .nav-link {
-    width: 140px;
+    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
     height: 50px;
     background: #e08296;
     font-size: 25px;

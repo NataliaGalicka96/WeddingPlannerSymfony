@@ -5,6 +5,11 @@ namespace App\Entity;
 use App\Repository\CheckListRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CheckListRepository::class)]
 class CheckList
 {
@@ -14,12 +19,31 @@ class CheckList
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Book title must be at least {{ limit }} characters long",
+     *      maxMessage = "Book title cannot be longer than {{ limit }} characters"
+     * )
+     */
     private ?string $categoryName = null;
 
     #[ORM\Column(length: 255)]
+    /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Book title must be at least {{ limit }} characters long",
+     *      maxMessage = "Book title cannot be longer than {{ limit }} characters"
+     * )
+     */
     private ?string $Task = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: false,
+    options: ["default" => 0])]
     private ?bool $status = null;
 
     #[ORM\ManyToOne(inversedBy: 'checkLists')]
@@ -77,4 +101,6 @@ class CheckList
 
         return $this;
     }
+
+
 }

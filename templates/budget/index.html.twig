@@ -22,6 +22,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('app_main_page')}}">Strona główna</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ path('app_check_list')}}">Zadania</a>
                     </li>
                     <li class="nav-item">
@@ -58,12 +61,26 @@
 
 
     <div class="container">
-
+<div class="row">
+        <form action="{{ path("set_budget") }}" method="POST">
+       
+            
+            
+            <div class="input-group mt-3" id="budget">
+                <span class="input-group-text">Budżet</span>
+                <input id="amount" class="form-control" type="number" step="0.01" min="0"
+                    aria-label="default input example" name="budget" placeholder="Podaj budżet" required {% for price in budget %}{% if price['budget'] != 0 %}value={{ price['budget'] }}{% endif %}{% endfor %}>
+                <span class="input-group-text">PLN</span>
+            </div>
+            
+        </form>
+        </div>
 
         <div class="row">
         <form action="{{ path("set_budget") }}" method="POST">
-        {% if budget is not empty %}
+       
             {% for price in budget %}
+          {#}
             <div class="input-group mt-3" id="budget">
                 <span class="input-group-text">Budżet</span>
                 <input id="amount" class="form-control" type="number" step="0.01" min="0"
@@ -73,6 +90,7 @@
             
         </form>
         </div>
+#}
         <div class="row mt-3">
             <div class="summary">
                 <table id="summary">
@@ -97,7 +115,7 @@
             </div>
         </div>
         {% endfor %}
-        {% endif %}
+        
 
         <div class="podcategory">
             <h1>Szczegóły wydatków</h1>   
@@ -139,7 +157,7 @@
                                                 aria-label="default input example" style="border: none; text-align:center;" value="{{detail['already_paid']}}" name="alreadyPayOfPodcategory"></td>
                                                 </form>
 
-                                                <td data-label="Pozostało do zapłaty" id="leftToPay"></td>
+                                                <td data-label="Pozostało do zapłacenia" id="leftToPay"></td>
                                             </tr>
                                                 
                                                 

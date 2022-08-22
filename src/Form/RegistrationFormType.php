@@ -11,9 +11,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Unique;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+
 
 class RegistrationFormType extends AbstractType
 {
@@ -21,21 +23,28 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => "Nazwa użytkownika"
+                'label' => "Nazwa użytkownika",
+                'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Proszę podać nazwę użytkownika.',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Twoja nazwa użytkownika powinna składać się z przynajmniej {{ limit }} znaków.',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 50,
+                        'maxMessage' => 'Twoja nazwa użytkownika powinna składać się z maksymalnie {{ limit }} znaków.',
+                    ]),
+                    
+                ],
+
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Adres e-mail'
+                'label' => 'Adres e-mail',
+                
             ])
-            /*
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
-            */
+
             ->add('plainPassword', PasswordType::class, [
                 'label' => "Hasło",
                 // instead of being set onto the object directly,
@@ -44,13 +53,15 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Proszę podać hasło.',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Twoje hasło powinno składać się z conajmniej {{ limit }} znaków.',
                         // max length allowed by Symfony for security reasons
-                        'max' => 4096,
+                        'max' => 30,
+                        'maxMessage' => 'Twoje hasło powinno składać się z maksymalnie {{ limit }} znaków.',
+
                     ]),
                 ],
             ])
