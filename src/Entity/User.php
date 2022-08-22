@@ -65,6 +65,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Note::class)]
     private Collection $notes;
 
+    #[ORM\ManyToOne(inversedBy: 'user')]
+    private ?WeddingSettings $weddingSettings = null;
+
 
     public function __construct()
     {
@@ -364,6 +367,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $note->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getWeddingSettings(): ?WeddingSettings
+    {
+        return $this->weddingSettings;
+    }
+
+    public function setWeddingSettings(?WeddingSettings $weddingSettings): self
+    {
+        $this->weddingSettings = $weddingSettings;
 
         return $this;
     }
