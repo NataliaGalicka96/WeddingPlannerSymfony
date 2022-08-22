@@ -4,6 +4,7 @@ body {
 
 .container {
     margin-top: 25px;
+    width: 50%;
 }
 
 .wrapper {
@@ -119,8 +120,11 @@ p {
     justify-content: center;
 }
 
-#floatingInput:hover,
-#floatingInput:focus {
+input:hover,
+#input:focus,
+.form-control:focus,
+.form-select:hover,
+.form-select:focus {
     border-color: #756c6e;
     box-shadow: inset 0px 0px 2px 2px #ef97aa;
 }

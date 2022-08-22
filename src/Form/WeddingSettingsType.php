@@ -68,9 +68,7 @@ class WeddingSettingsType extends AbstractType
                 'attr' => [
                     'placeholder' => "Data ślubu"
                 ],
-                'row_attr' => [
-                    'class' => 'form-floating mb-3'
-                ],
+                
                 'required' => true,
             ])
         ;
