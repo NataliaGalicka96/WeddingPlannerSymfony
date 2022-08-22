@@ -118,3 +118,9 @@ p {
 .row {
     justify-content: center;
 }
+
+#floatingInput:hover,
+#floatingInput:focus {
+    border-color: #756c6e;
+    box-shadow: inset 0px 0px 2px 2px #ef97aa;
+}
