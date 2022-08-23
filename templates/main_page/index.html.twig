@@ -92,26 +92,36 @@
         </div>
 
         -->
+
+    {% for data in dataWedding %}
+    {% if data['bride_name'] %}
+        <div>
+                <div class="row">
+                    <div class="col-8">
+                        <h1>{{ data['bride_name'] }} & {{ data['groom_name'] }}</h1>
+                        <p id = "time">{{ data['date'] }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <img src={{ asset("assets/images/nowe1.png")}}>
+                </div>
+            </div>
+
+        </div>
+    {% else %}
 <div class="container">
         {{ form_start(form) }}
         {{ form_row(form.brideName) }}
         {{ form_row(form.groomName) }}
         {{ form_row(form.date) }}
-
+<button type="submit" class=" btn btn-success" id="accept">Wyślij dane</button>
         {{ form_end(form) }}
 </div>
-        
-        <div>
-            <div class="row">
-                <div class="col-8">
-                    <h1>Natalia & Mariusz</h1>
-                    <p>Odliczanie czasu</p>
-                </div>
-            </div>
-            <div class="row">
-                <img src={{ asset("assets/images/nowe1.png")}}>
-            </div>
-        </div>
+    {% endif %}
 
-    </div>
+    {% endfor %}
+{% endblock %}
+{% block js %}
+    <script src="{{ asset('assets/js/timeToWedding.js') }}"></script>
+
 {% endblock %}

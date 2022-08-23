@@ -39,6 +39,19 @@ class WeddingSettingsRepository extends ServiceEntityRepository
         }
     }
 
+    public function getDataOfWedding($userId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT * FROM wedding_settings
+        WHERE user_id = :user_id";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+
+
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return WeddingSettings[] Returns an array of WeddingSettings objects
 //     */
