@@ -59,14 +59,21 @@
     <div class="wrapper">
 
 
-
     {% for data in dataWedding %}
     {% if data['bride_name'] %}
         <div>
                 <div class="row">
                     <div class="col-8">
                         <h1>{{ data['bride_name'] }} & {{ data['groom_name'] }}</h1>
-                        <p id = "time">{{ data['date'] }}</p>
+                        <p hidden id = "time">{{ data['date'] }}</p>
+                        <h1 style="color:#f07c22;">Do ślubu pozostało</h1>
+                        <div   id="timer">
+                            <div id="days"></div>
+                            <div id="hours"></div>
+                            <div id="minutes"></div>
+                            <div id="seconds"></div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="row">
