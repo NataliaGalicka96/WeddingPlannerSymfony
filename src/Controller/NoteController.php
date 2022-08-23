@@ -42,8 +42,8 @@ class NoteController extends AbstractController
     public function createNewTask(Request $request)
     {
 
-        $title = trim($request->request->get('title'));
-        $content = trim($request->request->get('content'));
+        $title = $request->request->get('title');
+        $content = $request->request->get('content');
         
         if(empty($title)||empty($content))
         return $this->redirectToRoute('app_note');
@@ -63,29 +63,6 @@ class NoteController extends AbstractController
     }
 
 
-    #[Route('/note/update/title/{id}', name: 'update_title', methods: "POST")]
-    public function updateTitle(Request $request, $id)
-    {
-
-        $newTitle = trim($request->request->get('title'));
-        
-         /** 
-         * @var User $user 
-         * */
-        
-        $user = $this->getUser();
-        if(!empty($user)){
-        $userId = $user->getId();
-        }
-        
-
-        $entityManager = $this->getDoctrine()->getManager();
-        
-        $title = $entityManager->getRepository(Note::class)->updateTitle($userId, $id, $newTitle);
-
-
-        return $this->redirectToRoute('app_note');
-    }
 
     
     #[Route('/note/update/note/{id}', name: 'update_note', methods: "POST")]
@@ -93,7 +70,7 @@ class NoteController extends AbstractController
     {
 
         $newNote = trim($request->request->get('note'));
-        
+        $newTitle = trim($request->request->get('title'));
 
          /** 
          * @var User $user 
@@ -108,6 +85,7 @@ class NoteController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         
         $expense = $entityManager->getRepository(Note::class)->updateNote($userId, $id, $newNote);
+        $title = $entityManager->getRepository(Note::class)->updateTitle($userId, $id, $newTitle);
 
         return $this->redirectToRoute('app_note');
     }

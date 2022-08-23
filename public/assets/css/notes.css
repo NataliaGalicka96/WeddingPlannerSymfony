@@ -92,7 +92,7 @@ li {
 .container>ul {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /*justify-content: center;*/
 }
 
 
@@ -118,16 +118,24 @@ li {
 
 .fa-solid,
 .fas {
+
+
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
-    display: flex;
-    flex-direction: row-reverse;
-
-    align-items: flex-start;
+    /* flex-direction: inherit; */
+    /* align-items: baseline; */
     margin-bottom: 15px;
-
     color: black;
-    text-decoration: underline;
+    /* width: 10px; */
+    /* display: flex; */
+    margin-left: 10px;
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
+}
+
+button {
+    background: none !important;
+    border: none !important;
 }
 
 
@@ -205,9 +213,13 @@ li {
 }
 
 
-textarea {
-    min-height: 18em;
+#noteTextarea {
+    min-height: 12em;
     max-height: 20em;
+}
+
+#title {
+    max-height: 5em;
 }
 
 .note {
