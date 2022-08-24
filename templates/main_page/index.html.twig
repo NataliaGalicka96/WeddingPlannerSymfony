@@ -58,9 +58,18 @@
 
     <div class="wrapper">
 
+{% if dataWedding is empty %}
+<div class="container">
+        {{ form_start(form) }}
+        {{ form_row(form.brideName) }}
+        {{ form_row(form.groomName) }}
+        {{ form_row(form.date) }}
+<button type="submit" class=" btn btn-success" id="accept">Wyślij dane</button>
+        {{ form_end(form) }}
+</div>
+{% else %}
+{% for data in dataWedding %}
 
-    {% for data in dataWedding %}
-    {% if data['bride_name'] %}
         <div>
                 <div class="row">
                     <div class="col-8">
@@ -82,18 +91,10 @@
             </div>
 
         </div>
-    {% else %}
-<div class="container">
-        {{ form_start(form) }}
-        {{ form_row(form.brideName) }}
-        {{ form_row(form.groomName) }}
-        {{ form_row(form.date) }}
-<button type="submit" class=" btn btn-success" id="accept">Wyślij dane</button>
-        {{ form_end(form) }}
-</div>
-    {% endif %}
-
-    {% endfor %}
+ {% endfor %}
+{% endif %}
+   
+    
 {% endblock %}
 {% block js %}
     <script src="{{ asset('assets/js/timeToWedding.js') }}"></script>
