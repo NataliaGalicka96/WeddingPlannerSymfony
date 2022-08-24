@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\NoteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
 
 #[ORM\Entity(repositoryClass: NoteRepository::class)]
 class Note
@@ -16,9 +19,27 @@ class Note
     #[ORM\ManyToOne(inversedBy: 'notes')]
     private ?User $user = null;
 
+    /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 20,
+     *      minMessage = "Tytuł powinien składać się z conajmniej {{ limit }} znaków.",
+     *      maxMessage = "Tytuł powinien składać się z maksymalnie {{ limit }} znaków."
+     * )
+     */
     #[ORM\Column(length: 255)]
     private ?string $Title = null;
 
+    /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 500,
+     *      minMessage = "Notatka powinna składać się z conajmniej {{ limit }} znaków.",
+     *      maxMessage = "Notatka powinna składać się z maksymalnie {{ limit }} znaków."
+     * )
+     */
     #[ORM\Column(length: 255)]
     private ?string $Note = null;
 

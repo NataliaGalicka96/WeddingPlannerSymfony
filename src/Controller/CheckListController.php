@@ -21,6 +21,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CheckListController extends AbstractController
 {
+     /**
+     * Error messages
+     *
+     * @var array
+     */
+    public $errorString = [];
+
     #[Route('/check/list', name: 'app_check_list')]
     public function index(): Response
     {
@@ -71,13 +78,22 @@ class CheckListController extends AbstractController
         $task->setUser($this->getUser());
         $task->setStatus(0);
 
-        $entityManager->persist($task);
-        $entityManager->flush();
 
-        //$errors = $validator->validate($task);
+        $errors = $validator->validate($task);
+        
+        if (count($errors) == 0) {
 
-
+            $entityManager->persist($task);
+            $entityManager->flush();
+            $this->addFlash('success', "Dodano nowe zadanie!");
             return $this->redirectToRoute('app_check_list');
+
+        }else{
+            $this->addFlash('error', "Nie udało się dodać zadania!");
+            return $this->redirectToRoute('app_check_list');
+            
+            }
+
     }
 
     
@@ -107,7 +123,6 @@ class CheckListController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('app_check_list');
     }
-
 
 
 }

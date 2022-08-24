@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class GuestType extends AbstractType
 {
@@ -22,7 +24,19 @@ class GuestType extends AbstractType
                 ],
                 'row_attr' => [
                     'class' => 'form-floating mb-3'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Proszę podać imię i nazwisko gościa.',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Imię gościa powinno składać się z przynajmniej {{ limit }} znaków.',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 50,
+                        'maxMessage' => 'Imię gościa powinno składać się z maksymalnie {{ limit }} znaków.',
+                    ]),
+                ],
             ])
             ->add('is_confirmed', CheckboxType::class,[
                 'label' => 'Potwierdzona obecność',

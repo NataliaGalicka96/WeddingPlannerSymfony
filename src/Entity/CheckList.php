@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
+
 
 use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CheckListRepository::class)]
@@ -24,8 +24,8 @@ class CheckList
      * @Assert\Length(
      *      min = 2,
      *      max = 100,
-     *      minMessage = "Book title must be at least {{ limit }} characters long",
-     *      maxMessage = "Book title cannot be longer than {{ limit }} characters"
+     *      minMessage = "Kategoria powinna składać się z conajmniej {{ limit }} znaków.",
+     *      maxMessage = "Kategoria powinna składać się z maksymalnie {{ limit }} znaków."
      * )
      */
     private ?string $categoryName = null;
@@ -34,10 +34,10 @@ class CheckList
     /**
      * @Assert\NotBlank(message="To pole jest wymagane.")
      * @Assert\Length(
-     *      min = 2,
+     *      min = 10,
      *      max = 100,
-     *      minMessage = "Book title must be at least {{ limit }} characters long",
-     *      maxMessage = "Book title cannot be longer than {{ limit }} characters"
+     *      minMessage = "Zadanie do wykonania powinno składać się z conajmniej {{ limit }} znaków.",
+     *      maxMessage = "Zadanie do wykonania powinno składać się z maksymalnie {{ limit }} znaków."
      * )
      */
     private ?string $Task = null;

@@ -6,6 +6,8 @@ use App\Repository\ExpensesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: ExpensesRepository::class)]
 class Expenses
 {
@@ -19,14 +21,33 @@ class Expenses
 
     #[ORM\Column(length: 255)]
     private ?string $category_name = null;
-
+     /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Nazwa musi składać się z przynajmniej {{ limit }} znaków.",
+     *      maxMessage = "Nazwa może składać się z maksymalnie {{ limit }} znaków."
+     * )
+     */
     #[ORM\Column(length: 255)]
     private ?string $expense = null;
-
+    
+    /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     * @Assert\PositiveOrZero (message="Proszę podać liczbę dodatnią.")
+     * @Assert\LessThan(10000000)(message="Wartość musi być mniejsza niż {{compared_value}} zł.)
+     */
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: false,
     options: ["default" => 0.00])]
     private ?string $Price = null;
 
+
+    /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     * @Assert\PositiveOrZero (message="Proszę podać liczbę dodatnią.")
+     * @Assert\LessThan(10000000)(message="Wartość musi być mniejsza niż {{compared_value}} zł.)
+     */
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: false,
     options: ["default" => 0.00])]
     private ?string $already_paid = null;
