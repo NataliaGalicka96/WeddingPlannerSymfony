@@ -9,7 +9,7 @@ body {
     color: black;
     text-align: center;
     display: flex;
-    flex-direction: column-reverse;
+
     justify-content: center;
     box-shadow: 10px 5px 5px rgb(173 165 165);
     transition: all 0.5s ease-out;
@@ -169,6 +169,8 @@ table th {
     background-color: rgb(246, 54, 54);
     width: 25% !important;
     margin-right: 15px;
+    font-size: 16px;
+
 
 }
 
@@ -176,12 +178,16 @@ table th {
     background-color: rgb(61, 187, 61);
     width: 35% !important;
     margin-right: 10px;
+    font-size: 16px;
+
 }
 
 #floatingInput:hover,
 #floatingInput:focus {
     border-color: #756c6e;
     box-shadow: inset 0px 0px 2px 2px #ef97aa;
+    font-size: 16px;
+
 }
 
 

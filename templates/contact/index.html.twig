@@ -87,7 +87,7 @@
                         <td data-label="Adres">ul. {{ contact["street"] }} {{ contact['home_number'] }}, {{ contact['postalcode'] }} {{ contact["city"] }}</td>
                         <td data-label="E-mail">{{ contact["email"] }}</td>
                         <td data-label="Telefon">{{ contact["phone_number"] }} </td>
-                        <td><a onclick="return confirm('Czy na pewno chcesz usunąć to zadanie?')" href="{{path('contact_delete',{'id': contact.id})}}"><span class="input-group-text" id="delete"><i class="fa-solid fa-trash-can"></i></span></a><button type="submit" data-bs-toggle="modal" data-bs-target="#editContact"><i class="fa-solid fa-pen-to-square mx-3"></i></button>  </td>
+                        <td><a onclick="return confirm('Czy na pewno chcesz usunąć to zadanie?')" href="{{path('contact_delete',{'id': contact.id})}}"><span class="input-group-text" id="delete"><i class="fa-solid fa-trash-can"></i></span></a><!--<button type="submit" data-bs-toggle="modal" data-bs-target="#editContact"><i class="fa-solid fa-pen-to-square mx-3"></i></button>-->  </td>
 
                     </tr>
                     {% endfor %}
@@ -123,7 +123,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn" id="cancel" data-bs-dismiss="modal">Anuluj</button>
-                    <button type="submit" class=" btn " id="accept">Zapisz kontakt</button>
+                    <button type="submit" class=" btn " id="accept">Zapisz</button>
                 </div>
                  {{ form_end(formContact) }}
                 
