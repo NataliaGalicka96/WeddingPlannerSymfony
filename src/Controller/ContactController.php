@@ -84,5 +84,16 @@ class ContactController extends AbstractController
         return $this->redirectToRoute('app_contact');
     }
 
+    #[Route('contact/edit/{id}', name: 'contact_edit')]
+ 
+    public function edit(Contact $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($id);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_contact');
+    }
+
+
 
 }

@@ -4,6 +4,7 @@ body {
 
 .container {
     margin-top: 25px;
+    width: 50%;
 }
 
 .wrapper {
@@ -16,6 +17,8 @@ h1 {
     margin-top: 40px;
     margin-bottom: 40px;
     font-family: 'Dancing Script', cursive;
+    font-size: 50px;
+    color: #db4844;
 }
 
 .container-fluid {
@@ -117,4 +120,49 @@ p {
 
 .row {
     justify-content: center;
+}
+
+input:hover,
+#input:focus,
+.form-control:focus,
+.form-select:hover,
+.form-select:focus {
+    border-color: #756c6e;
+    box-shadow: inset 0px 0px 2px 2px #ef97aa;
+}
+
+span {
+    line-height: 1;
+    padding: 20px;
+    font-size: 40px
+}
+
+#timer {
+
+    text-align: center;
+    color: white;
+    font-weight: 100;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+#days {
+    font-size: 50px;
+    color: #db4844;
+}
+
+#hours {
+    font-size: 50px;
+    color: #f07c22;
+}
+
+#minutes {
+    font-size: 50px;
+    color: #f6da74;
+}
+
+#seconds {
+    font-size: 25px;
+    color: #abcd58;
 }

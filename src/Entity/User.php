@@ -65,6 +65,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Note::class)]
     private Collection $notes;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: WeddingSettings::class)]
+    private Collection $weddingSettings;
+
+
+
 
     public function __construct()
     {
@@ -75,6 +80,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->expenses = new ArrayCollection();
         $this->budget = new ArrayCollection();
         $this->notes = new ArrayCollection();
+        $this->weddingSettings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -362,6 +368,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($note->getUser() === $this) {
                 $note->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, WeddingSettings>
+     */
+    public function getWeddingSettings(): Collection
+    {
+        return $this->weddingSettings;
+    }
+
+    public function addWeddingSettings(Contact $weddingSettings): self
+    {
+        if (!$this->weddingSettings->contains($weddingSettings)) {
+            $this->weddingSettings->add($weddingSettings);
+            $weddingSettings->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWeddingSettings(Contact $weddingSettings): self
+    {
+        if ($this->weddingSettings->removeElement($weddingSettings)) {
+            // set the owning side to null (unless already changed)
+            if ($weddingSettings->getUser() === $this) {
+                $weddingSettings->setUser(null);
             }
         }
 

@@ -66,16 +66,21 @@
             <ul>
             {% for note in notes %}
                 <li>
-                    <a>
-                    <a onclick="return confirm('Czy na pewno chcesz usunąć notatkę?')" href="{{path('note_delete',{'id':note.id})}}"><i class="fa-solid fa-xmark"></i></a>
-                    
-                    <form action="{{ path("update_title",{'id':note["id"]}) }}" method="POST">
-                        <input type="text" id="title" name="title" value={{ note['title']}}>
-                    </form>
+
+
+                   
+
                     <form action="{{ path("update_note",{'id':note["id"]}) }}" method="POST">
-                        <input type="text" id="note" name="note" value={{ note['note'] }}>
-                    </form>
-                    </a>
+                        <textarea  name="title" id="title">{{ note['title']}}  </textarea>
+                        <textarea  name="note" id="noteTextarea">{{ note['note'] }} </textarea>
+                    <button type="submit"><i class="fa-solid fa-floppy-disk"></i></button>
+                    <a onclick="return confirm('Czy na pewno chcesz usunąć notatkę?')" href="{{path('note_delete',{'id':note.id})}}" id="delete"><i class="fa-solid fa-trash-can"></i></a>
+                    
+                    </form> 
+                    
+
+                    
+
                 </li>
             {% endfor %}
                 
@@ -109,8 +114,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" id="cancel" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class=" btn btn-success" id="accept">Save changes</button>
+                        <button type="button" class="btn" id="cancel" data-bs-dismiss="modal">Anuluj</button>
+                        <button type="submit" class=" btn" id="accept">Zapisz</button>
                     </div>
                     </form>
                     
