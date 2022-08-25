@@ -32,7 +32,6 @@ class GuestType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Imię gościa powinno składać się z przynajmniej {{ limit }} znaków.',
-                        // max length allowed by Symfony for security reasons
                         'max' => 50,
                         'maxMessage' => 'Imię gościa powinno składać się z maksymalnie {{ limit }} znaków.',
                     ]),

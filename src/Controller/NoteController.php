@@ -75,16 +75,13 @@ class NoteController extends AbstractController
             }
 
     }
-
-
-
     
     #[Route('/note/update/note/{id}', name: 'update_note', methods: "POST")]
     public function updateNote(Request $request, $id)
     {
 
         $newNote = trim($request->request->get('note'));
-        $newTitle = trim($request->request->get('title'));
+        $newTitle = trim($request->request->get('titleEdit'));
 
          /** 
          * @var User $user 

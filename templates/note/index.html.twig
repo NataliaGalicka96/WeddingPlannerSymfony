@@ -4,7 +4,10 @@
 
 {% block stylesheets %}
    <link rel="stylesheet" href="{{ asset('assets/css/notes.css') }}">
+   
 {% endblock %}
+
+
 {% block body %}
 <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -70,9 +73,13 @@
 
                    
 
-                    <form action="{{ path("update_note",{'id':note["id"]}) }}" method="POST">
-                        <textarea  name="title" id="title">{{ note['title']}}  </textarea>
+                    <form action="{{ path("update_note",{'id':note["id"]}) }}" method="POST" id="editNote">
+                        <textarea  name="titleEdit" id="title">{{ note['title']}}  </textarea>
+                        <ul class="text-danger text-center mt-1 error titleEditError" style="list-style-type:none;">
+                        </ul>
                         <textarea  name="note" id="noteTextarea">{{ note['note'] }} </textarea>
+                        <ul class="text-danger text-center mt-1 error noteError" style="list-style-type:none;">
+                        </ul>
                     <button type="submit"><i class="fa-solid fa-floppy-disk"></i></button>
                     <a onclick="return confirm('Czy na pewno chcesz usunąć notatkę?')" href="{{path('note_delete',{'id':note.id})}}" id="delete"><i class="fa-solid fa-trash-can"></i></a>
                     
@@ -98,17 +105,23 @@
                     </div>
                     
                     <div class="modal-body">
-                   <form action="{{ path("create_new_note") }}" method="POST">
+                   <form action="{{ path("create_new_note") }}" method="POST" id="noteForm">
 
                         
                         <div class="form-floating mb-3">
                             <input name = "title" type="text" class="form-control" id="floatingInput" placeholder="..." >
                             <label for="floatingInput">Tytuł notatki</label>
                         </div>
+                         <div class="text-danger text-center mt-1 error titleError" style="list-style-type:none;">
+
+                        </div>
                         
                         <div class="form-floating mb-3">
                             <input name = "content" type="text" class="form-control" id="floatingInput" placeholder="...">
                             <label for="floatingInput">Nowe zadanie</label>
+                        </div>
+                        <div class="text-danger text-center mt-1 error contentError" style="list-style-type:none;">
+
                         </div>
                         
 
@@ -122,63 +135,10 @@
                 </div>
             </div>
         </div>
-<!--
-        <script>
+        {% block js %}
+            <script src="{{ asset('assets/js/noteValidation.js') }}"></script>
+        {% endblock %}
 
-            var noteTemp = '<a class="note" style="overflow: hidden;">'
-                + '<input  type="text" id="title" name="title" placeholder="Tytuł">'
-                + '<textarea id="note" name="note" placeholder="Treść notatki"></textarea>'
-                + '</a>';
+            
 
-            var noteZindex = 1;
-
-            function newNote() {
-                $(noteTemp).hide().appendTo("#board").show("fade", 300).draggable().on('dragstart',
-                    function () {
-                        $(this).zIndex(++noteZindex);
-                    });
-
-                $('textarea').autogrow();
-
-
-                $('.note')
-                return false;
-
-            };
-
-
-
-            $(document).ready(function () {
-
-
-                $("#board").height($(document).height());
-
-                $("#add_new").click(newNote);
-
-                $('.remove').click(deleteNote);
-
-                newNote();
-
-
-                return false;
-            });
-
-            function scroll() {
-                const tx = document.querySelectorAll('#note');
-                for (let i = 0; i < tx.length; i++) {
-                    tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-                    tx[i].addEventListener("input", OnInput, false);
-                }
-
-                function OnInput() {
-                    this.style.height = "auto";
-                    this.style.height = (this.scrollHeight) + "px";
-                }
-
-            }
-
-
-        </script>
-
--->
 {% endblock %}

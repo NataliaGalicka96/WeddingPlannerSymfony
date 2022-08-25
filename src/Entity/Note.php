@@ -23,7 +23,7 @@ class Note
      * @Assert\NotBlank(message="To pole jest wymagane.")
      * @Assert\Length(
      *      min = 6,
-     *      max = 20,
+     *      max = 30,
      *      minMessage = "Tytuł powinien składać się z conajmniej {{ limit }} znaków.",
      *      maxMessage = "Tytuł powinien składać się z maksymalnie {{ limit }} znaków."
      * )
@@ -35,7 +35,7 @@ class Note
      * @Assert\NotBlank(message="To pole jest wymagane.")
      * @Assert\Length(
      *      min = 10,
-     *      max = 500,
+     *      max = 400,
      *      minMessage = "Notatka powinna składać się z conajmniej {{ limit }} znaków.",
      *      maxMessage = "Notatka powinna składać się z maksymalnie {{ limit }} znaków."
      * )

@@ -32,7 +32,11 @@ class GuestController extends AbstractController
         $summary = $em->getRepository(Guest::class)->getSummaryOfGuest($userId);
 
 
-        $form = $this->createForm(GuestType::class);
+        $form = $this->createForm(GuestType::class, null, array(
+            'attr' => array(
+                'id' => 'guestForm'
+            )
+        ));
         
         $form->handleRequest($request);
         

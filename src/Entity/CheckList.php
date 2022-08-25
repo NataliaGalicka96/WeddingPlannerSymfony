@@ -21,11 +21,6 @@ class CheckList
     #[ORM\Column(length: 255)]
     /**
      * @Assert\NotBlank(message="To pole jest wymagane.")
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 100,
-     *      minMessage = "Kategoria powinna składać się z conajmniej {{ limit }} znaków.",
-     *      maxMessage = "Kategoria powinna składać się z maksymalnie {{ limit }} znaków."
      * )
      */
     private ?string $categoryName = null;

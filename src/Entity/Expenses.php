@@ -24,10 +24,10 @@ class Expenses
      /**
      * @Assert\NotBlank(message="To pole jest wymagane.")
      * @Assert\Length(
-     *      min = 3,
-     *      max = 50,
-     *      minMessage = "Nazwa musi składać się z przynajmniej {{ limit }} znaków.",
-     *      maxMessage = "Nazwa może składać się z maksymalnie {{ limit }} znaków."
+     *      min = 10,
+     *      max = 100,
+     *      minMessage = "Nazwa wydatku powinna składać się z conajmniej {{ limit }} znaków.",
+     *      maxMessage = "Nazwa wydatku powinna składać się z maksymalnie {{ limit }} znaków."
      * )
      */
     #[ORM\Column(length: 255)]

@@ -150,6 +150,9 @@
                 <div class="modal-body">
                 {{ form_start(guestform)}}
                     {{ form_row(guestform.name) }}  
+                    <span class="text-danger text-center mt-1 error guestError" style="list-style-type:none;">
+
+                    </span>
                     {{ form_row(guestform.is_confirmed) }}  
                     {{ form_row(guestform.is_accommodation) }}  
                     {{ form_row(guestform.transport) }}  
@@ -159,6 +162,7 @@
                     {{ form_row(guestform.special_diet) }}  
 
                 </div>
+                
                 <div class="modal-footer">
                     <button type="button" class="btn" id="cancel" data-bs-dismiss="modal">Anuluj</button>
                     <button type="submit" class=" btn" id="accept">Zapisz</button>
@@ -167,4 +171,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block js %}
+    <script src="{{ asset('assets/js/guestValidation.js') }}"></script>
+ 
+
 {% endblock %}
