@@ -54,11 +54,28 @@ class ExpensesRepository extends ServiceEntityRepository
 
     }
 
+    public function getSummary($userId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT category_name, SUM(price) AS price, SUM(already_paid) AS paid
+        FROM expenses
+        WHERE user_id = :user_id
+        GROUP BY category_name";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+
+
+        return $resultSet->fetchAllAssociative();
+
+    }
+
     public function getSumOfAlreadyPaid($userId)
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT SUM(already_paid) AS SUM, category_name
+        $sql = "SELECT category_name, SUM(already_paid) AS SUM
         FROM expenses
         WHERE user_id = :user_id
         GROUP BY category_name";

@@ -113,6 +113,12 @@
                     </tbody>
                 </table>
             </div>
+                
+                <div class="alert mt-3" role="alert" id="comment">
+                    
+                </div>
+
+           
         </div>
         {% endfor %}
         
@@ -153,7 +159,7 @@
                                                 </form>
                                                 <span class="text-danger text-center mt-1 error updatePriceError" style="list-style-type:none;">
 
-                        </span>
+                                                 </span>
 
                                                 <form action="{{ path("update_alreadypay",{'id':detail["id"]}) }}" method="POST" id="addAlreadyPaidForm">
                                                 <td data-label="Zapłacono"><input id="alreadySpend" class="form-control" type="number" step="0.01" min="0"
@@ -164,10 +170,20 @@
                                             </tr>
                                                 
                                                 
+                                        {% endif %} {% endfor %}
+                                        <form>
+                                        <tr>
+                                        {% for sum in summary %}
+                                        {% if paid["category_name"] == sum['category_name'] %}
+                                            <td data-label="Wydatek" style="font-weight: bold;">Podsumowanie</td>   
+                                            <td data-label="Cena" style="font-weight: bold;" id="price">{{ sum['price'] }}</td>
+                                            <td data-label="Zapłacono" style="font-weight: bold;" id="alreadySpend">{{ sum['paid'] }}</td>
+                                            <td data-label="Pozostało do zapłacenia" id="left" style="font-weight: bold;"></td>
+                                        </tr>
                                         {% endif %}
-                                                
-                                    {% endfor %}
-                                    <form>
+                                        {% endfor %}
+
+                                    
                                     </tbody>
                                 </table>
                                 </div>

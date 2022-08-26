@@ -8,8 +8,7 @@ function validateTask() {
             rules: {
                 category: {
                     required: true,
-                    //  minlength: 3,
-                    //  maxlength: 100,
+
 
 
                 },
@@ -22,12 +21,11 @@ function validateTask() {
             },
             messages: {
 
-                title: {
+                category: {
                     required: 'Proszę wybrać kategorię.',
-                    // minlength: "Nazwa kategorii musi składać się z conajmniej 3 znaków.",
-                    // maxlength: "Nazwa kategorii może składać się z maksymalnie 100 znaków",
+
                 },
-                content: {
+                title: {
                     required: 'Proszę wpisać treść zadania.',
                     minlength: "Treść zadania musi składać się z conajmniej 10 znaków.",
                     maxlength: "Treść zadania może składać się z maksymalnie 100 znaków",

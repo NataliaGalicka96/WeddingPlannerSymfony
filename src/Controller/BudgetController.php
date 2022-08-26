@@ -40,6 +40,7 @@ class BudgetController extends AbstractController
         $alreadyPaidGroupByCategory = $em->getRepository(Expenses::class)->getSumOfAlreadyPaid($userId);
         $sumOfalreadyPaid = $em->getRepository(Expenses::class)->sumOfAllExpenses($userId);
         $detailsOfExpense = $em->getRepository(Expenses::class)->getDetailsOfExpense($userId);
+        $summary = $em->getRepository(Expenses::class)->getSummary($userId);
 
 
 
@@ -49,7 +50,8 @@ class BudgetController extends AbstractController
             'budget' => $budget,
             'alreadyPaid' => $alreadyPaidGroupByCategory,
             'sumOfAlreadyPaid' => $sumOfalreadyPaid,
-            'details' => $detailsOfExpense
+            'details' => $detailsOfExpense,
+            'summary' => $summary
         ]);
     }
 
@@ -168,20 +170,3 @@ class BudgetController extends AbstractController
     }
 }
 
-/*
-    if(empty($title))
-        return $this->redirectToRoute('app_check_list');
-
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $task = new CheckList();
-
-        $task->setCategoryName($category);
-        $task->setTask($title);
-        $task->setUser($this->getUser());
-
-        $entityManager->persist($task);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_check_list');
-        */
