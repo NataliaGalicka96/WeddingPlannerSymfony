@@ -17,8 +17,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
                         <a class="nav-link active" href="{{ path('app_main_page')}}">Strona główna</a>
                     </li>
                     <li class="nav-item">
@@ -36,20 +36,14 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ path('app_contact')}}">Kontakty</a>
                     </li>
-                    <!--
                     <li class="nav-item">
-                        <a class="nav-link active" href="Calendar.html">Kalendarz</a>
-                    </li>
-                    -->
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Ustawienia</a>
+                        <a class="nav-link active" href="{{ path('app_settings')}}">Ustawienia</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="{{  path('app_logout')}}">Wyloguj</a>
                     </li>
 
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -150,6 +144,9 @@
                 <div class="modal-body">
                 {{ form_start(guestform)}}
                     {{ form_row(guestform.name) }}  
+                    <span class="text-danger text-center mt-1 error guestError" style="list-style-type:none;">
+
+                    </span>
                     {{ form_row(guestform.is_confirmed) }}  
                     {{ form_row(guestform.is_accommodation) }}  
                     {{ form_row(guestform.transport) }}  
@@ -159,6 +156,7 @@
                     {{ form_row(guestform.special_diet) }}  
 
                 </div>
+                
                 <div class="modal-footer">
                     <button type="button" class="btn" id="cancel" data-bs-dismiss="modal">Anuluj</button>
                     <button type="submit" class=" btn" id="accept">Zapisz</button>
@@ -167,4 +165,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block js %}
+    <script src="{{ asset('assets/js/guestValidation.js') }}"></script>
+ 
+
 {% endblock %}

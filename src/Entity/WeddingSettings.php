@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: WeddingSettingsRepository::class)]
 class WeddingSettings
 {
@@ -16,12 +18,33 @@ class WeddingSettings
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Imię powinno składać się z conajmniej {{ limit }} znaków.",
+     *      maxMessage = "Imię powinno składać się z maksymalnie {{ limit }} znaków."
+     * )
+     */
     #[ORM\Column(length: 255)]
     private ?string $brideName = null;
 
+    /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Imię powinno składać się z conajmniej {{ limit }} znaków.",
+     *      maxMessage = "Imię powinno składać się z maksymalnie {{ limit }} znaków."
+     * )
+     */
     #[ORM\Column(length: 255)]
     private ?string $groomName = null;
-
+    
+    /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 

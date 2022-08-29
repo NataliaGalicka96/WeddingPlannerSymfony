@@ -18,8 +18,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
                         <a class="nav-link active" href="{{ path('app_main_page')}}">Strona główna</a>
                     </li>
                     <li class="nav-item">
@@ -37,13 +37,8 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ path('app_contact')}}">Kontakty</a>
                     </li>
-                    <!--
                     <li class="nav-item">
-                        <a class="nav-link active" href="Calendar.html">Kalendarz</a>
-                    </li>
-                    -->
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Ustawienia</a>
+                        <a class="nav-link active" href="{{ path('app_settings')}}">Ustawienia</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="{{  path('app_logout')}}">Wyloguj</a>
@@ -58,17 +53,19 @@
 
     <div class="wrapper">
 
-{% if dataWedding is empty %}
-<div class="container">
-        {{ form_start(form) }}
-        {{ form_row(form.brideName) }}
-        {{ form_row(form.groomName) }}
-        {{ form_row(form.date) }}
-<button type="submit" class=" btn btn-success" id="accept">Wyślij dane</button>
-        {{ form_end(form) }}
-</div>
-{% else %}
-{% for data in dataWedding %}
+        {% if dataWedding is empty %}
+
+                <div class="container">
+                <h1>Uzupełnij dane</h1>
+                {{ form_start(form) }}
+                {{ form_row(form.brideName) }}
+                {{ form_row(form.groomName) }}
+                {{ form_row(form.date) }}
+                <button type="submit" class=" btn btn-success" id="accept">Wyślij dane</button>
+                {{ form_end(form) }}
+        </div>
+        {% else %}
+        {% for data in dataWedding %}
 
         <div>
                 <div class="row">

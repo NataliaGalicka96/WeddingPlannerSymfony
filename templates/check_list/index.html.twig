@@ -21,8 +21,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
                         <a class="nav-link active" href="{{ path('app_main_page')}}">Strona główna</a>
                     </li>
                     <li class="nav-item">
@@ -40,13 +40,8 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ path('app_contact')}}">Kontakty</a>
                     </li>
-                    <!--
                     <li class="nav-item">
-                        <a class="nav-link active" href="Calendar.html">Kalendarz</a>
-                    </li>
-                    -->
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Ustawienia</a>
+                        <a class="nav-link active" href="{{ path('app_settings')}}">Ustawienia</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="{{  path('app_logout')}}">Wyloguj</a>
@@ -120,7 +115,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                <form action="{{ path("create_new_task") }}" method="POST">
+                <form action="{{ path("create_new_task") }}" method="POST" id="checkListForm">
                         <div class="mb-3">
                         
                             <select class="form-control" name="category" id="floatingInput"
@@ -131,10 +126,17 @@
                                     {% endfor %}
                             </select>
                         </div>
+                        <div class="text-danger text-center mt-1 error categoryError" style="list-style-type:none;">
+
+                        </div>
                         <div class="form-floating mb-3">
-                            <input name = "title" type="text" class="form-control" id="floatingInput" placeholder="..." name="task">
+                            <input name = "title" type="text" class="form-control" id="floatingInput" placeholder="..." >
                             <label for="floatingInput">Nowe zadanie</label>
                         </div>
+                        <div class="text-danger text-center mt-1 error titleError" style="list-style-type:none;">
+
+                        </div>
+
 
 
                     
@@ -147,4 +149,8 @@
             </div>
         </div>
     </div>
+
+        {% block js %}
+            <script src="{{ asset('assets/js/checkListValidation.js') }}"></script>
+        {% endblock %}
 {% endblock %}

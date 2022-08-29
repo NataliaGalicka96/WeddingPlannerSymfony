@@ -11,6 +11,9 @@ use App\Entity\Expenses;
 use App\Entity\Budget;
 use Symfony\Component\HttpFoundation\Request;
 
+
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 class BudgetController extends AbstractController
 {
     #[Route('/budget', name: 'app_budget')]
@@ -37,6 +40,7 @@ class BudgetController extends AbstractController
         $alreadyPaidGroupByCategory = $em->getRepository(Expenses::class)->getSumOfAlreadyPaid($userId);
         $sumOfalreadyPaid = $em->getRepository(Expenses::class)->sumOfAllExpenses($userId);
         $detailsOfExpense = $em->getRepository(Expenses::class)->getDetailsOfExpense($userId);
+        $summary = $em->getRepository(Expenses::class)->getSummary($userId);
 
 
 
@@ -46,7 +50,8 @@ class BudgetController extends AbstractController
             'budget' => $budget,
             'alreadyPaid' => $alreadyPaidGroupByCategory,
             'sumOfAlreadyPaid' => $sumOfalreadyPaid,
-            'details' => $detailsOfExpense
+            'details' => $detailsOfExpense,
+            'summary' => $summary
         ]);
     }
 
@@ -75,7 +80,7 @@ class BudgetController extends AbstractController
 
 
     #[Route('/budget/addNewExpense', name: 'add_new_expense', methods: 'POST')]
-    public function addNewExpense(Request $request)
+    public function addNewExpense(Request $request, ValidatorInterface $validator)
     {
 
         $category = trim($request->request->get('category'));
@@ -93,18 +98,31 @@ class BudgetController extends AbstractController
         $expense->setAlreadyPaid($alreadyPaid); 
         $expense->setUser($this->getUser()); 
 
-        $entityManager->persist($expense);
-        $entityManager->flush();
 
-        return $this->redirectToRoute('app_budget');
+        $errors = $validator->validate($expense);
+        
+        if (count($errors) == 0) {
+
+            $entityManager->persist($expense);
+        $entityManager->flush();
+            $this->addFlash('success', "Dodano nowy wydatek!");
+            return $this->redirectToRoute('app_budget');
+
+        }else{
+            $this->addFlash('error', "Nie udało się dodać wydatku!");
+            return $this->redirectToRoute('app_budget');
+            
+        }
+
+    
     }
 
     #[Route('/budget/update/price/{id}', name: 'update_price', methods: "POST")]
-    public function updatePrice(Request $request, $id)
+    public function updatePrice(Request $request, $id, ValidatorInterface $validator)
     {
 
         $newPrice = trim($request->request->get('priceOfPodcategory'));
-        //$price = (float)number_format((float)$newPrice, 2, '.', '');
+        $price = (float)number_format((float)$newPrice, 2, '.', '');
 
          /** 
          * @var User $user 
@@ -114,13 +132,15 @@ class BudgetController extends AbstractController
         if(!empty($user)){
         $userId = $user->getId();
         }
-        
 
+        
+        
+       
+    
         $entityManager = $this->getDoctrine()->getManager();
-        
-        $expense = $entityManager->getRepository(Expenses::class)->updatePrice($userId, $id, $newPrice);
+        $expense = $entityManager->getRepository(Expenses::class)->updatePrice($userId, $id, $price);
 
-        var_dump($expense);
+   
 
 
         return $this->redirectToRoute('app_budget');
@@ -142,31 +162,11 @@ class BudgetController extends AbstractController
         $userId = $user->getId();
         }
         
-
         $entityManager = $this->getDoctrine()->getManager();
-        
         $expense = $entityManager->getRepository(Expenses::class)->updateAlreadyPaid($userId, $id, $newPrice);
-
 
 
         return $this->redirectToRoute('app_budget');
     }
 }
 
-/*
-    if(empty($title))
-        return $this->redirectToRoute('app_check_list');
-
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $task = new CheckList();
-
-        $task->setCategoryName($category);
-        $task->setTask($title);
-        $task->setUser($this->getUser());
-
-        $entityManager->persist($task);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_check_list');
-        */

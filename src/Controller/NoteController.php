@@ -9,6 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Note;
 
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
+
 class NoteController extends AbstractController
 {
     #[Route('/note', name: 'app_note')]
@@ -39,7 +42,7 @@ class NoteController extends AbstractController
     }
 
     #[Route('/note/create', name: 'create_new_note', methods: 'POST')]
-    public function createNewTask(Request $request)
+    public function createNewTask(Request $request, ValidatorInterface $validator)
     {
 
         $title = $request->request->get('title');
@@ -56,21 +59,29 @@ class NoteController extends AbstractController
         $note->setTitle($title);
         $note->setUser($this->getUser());
 
-        $entityManager->persist($note);
-        $entityManager->flush();
+        $errors = $validator->validate($note);
 
-        return $this->redirectToRoute('app_note');
+        if (count($errors) == 0) {
+            $entityManager->persist($note);
+            $entityManager->flush();
+            $this->addFlash('success', "Dodano nową notatkę!");
+            return $this->redirectToRoute('app_note');
+
+
+        }else{
+            $this->addFlash('error', "Nie udało się dodać notatki!");
+            return $this->redirectToRoute('app_note');
+
+            }
+
     }
-
-
-
     
     #[Route('/note/update/note/{id}', name: 'update_note', methods: "POST")]
     public function updateNote(Request $request, $id)
     {
 
         $newNote = trim($request->request->get('note'));
-        $newTitle = trim($request->request->get('title'));
+        $newTitle = trim($request->request->get('titleEdit'));
 
          /** 
          * @var User $user 
