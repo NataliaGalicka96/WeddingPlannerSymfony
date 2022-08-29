@@ -42,7 +42,7 @@ class WeddingSettings
     #[ORM\Column(length: 255)]
     private ?string $groomName = null;
     
-      /**
+    /**
      * @Assert\NotBlank(message="To pole jest wymagane.")
      */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

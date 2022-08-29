@@ -68,7 +68,6 @@ class WeddingSettingsType extends AbstractType
                 'attr' => [
                     'placeholder' => "Data ślubu"
                 ],
-                
                 'required' => true,
             ])
         ;

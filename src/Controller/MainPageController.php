@@ -36,7 +36,6 @@ class MainPageController extends AbstractController
         $form->handleRequest($request);
 
         
-        
         if ($form->isSubmitted() && $form->isValid()) { 
             if($this->getUser())
             {
@@ -53,22 +52,15 @@ class MainPageController extends AbstractController
                     $em->persist($weddingDetail);
                     $em->flush();
                     $this->addFlash('success', "Ustawiono datę ślubu oraz imiona Państwa Młodych!");
-                    return $this->render('main_page/index.html.twig', [
-
-                        'form' => $form->createView(),
-                        'dataWedding' => $dataOfWedding
-                        
-                    ]);
-
+                    return $this->redirectToRoute('app_main_page');
 
                 }else {
                     $this->addFlash('error', 'Nie udało się ustawić danych!');
 
-
                 }
         
-       
             }
+
         }
         return $this->render('main_page/index.html.twig', [
 
@@ -76,7 +68,6 @@ class MainPageController extends AbstractController
             'dataWedding' => $dataOfWedding
             
         ]);
-
-        
+    
     }
 }

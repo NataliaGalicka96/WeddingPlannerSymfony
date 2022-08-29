@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\GuestType;
 use App\Entity\Guest;
 
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
+
 class GuestController extends AbstractController
 {
     #[Route('/guest', name: 'app_guest')]
@@ -27,6 +30,7 @@ class GuestController extends AbstractController
         if(!empty($user)){
         $userId = $user->getId();
         }
+        
         $em = $this->getDoctrine()->getManager();
         $guests = $em->getRepository(Guest::class)->getGuestAssignedToUser($userId);
         $summary = $em->getRepository(Guest::class)->getSummaryOfGuest($userId);

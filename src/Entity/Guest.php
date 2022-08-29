@@ -6,6 +6,11 @@ use App\Repository\GuestRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: GuestRepository::class)]
 
 class Guest
@@ -19,6 +24,15 @@ class Guest
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    /**
+     * @Assert\NotBlank(message="To pole jest wymagane.")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "To pole powinno składać się z conajmniej {{ limit }} znaków.",
+     *      maxMessage = "To pole powinno składać się z maksymalnie {{ limit }} znaków."
+     * )
+     */
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
