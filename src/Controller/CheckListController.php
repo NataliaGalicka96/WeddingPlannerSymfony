@@ -12,8 +12,6 @@ use App\Entity\User;
 
 use Symfony\Component\HttpFoundation\Request;
 
-use Symfony\Component\HttpClient\HttpClient;
-
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
