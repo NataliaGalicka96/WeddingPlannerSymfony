@@ -64,3 +64,12 @@ DirectoryIndex index.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
+
+# mysymfonyapp/public/.htaccess:
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks
+    RewriteBase /
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
